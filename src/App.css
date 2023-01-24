@@ -36,3 +36,66 @@
     transform: rotate(360deg);
   }
 }
+body{
+  background-color: 
+  #B1D8B7;
+}
+
+/* Register page CSS */
+.Form{
+  position: absolute;
+  left:33.33%;
+  width:33.33%;
+  background-color: #2F5233;
+  padding:2%;
+  top:10%;
+  border-radius: 30px;
+  display: flex;
+  flex-direction: column;
+}
+.Form input{
+  padding: 3%;
+  margin-top: 3%;
+  margin-bottom: 3%;
+  background-color: #94C973;
+  border-radius: 20px;
+  color:#2A2F33;
+  border:#121212;
+  border-width: 10px;
+}
+.Navs p{
+  font-size: 20px;
+}
+/* CSS */
+
+.button-35 {
+  align-items: center;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: transparent 0 0 0 3px,rgba(18, 18, 18, .1) 0 6px 20px;
+  box-sizing: border-box;
+  color: #121212;
+  cursor: pointer;
+  display: inline-flex;
+  flex: 1 1 auto;
+  font-family: Inter,sans-serif;
+  font-size: 1.2rem;
+  font-weight: 700;
+  justify-content: center;
+  line-height: 1;
+  margin: 0;
+  outline: none;
+  padding: 1rem 1.2rem;
+  text-align: center;
+  text-decoration: none;
+  transition: box-shadow .2s,-webkit-box-shadow .2s;
+  white-space: nowrap;
+  border: 0;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.button-35:hover {
+  box-shadow: #121212 0 0 0 3px, transparent 0 0 0 0;
+}
