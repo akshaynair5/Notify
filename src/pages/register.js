@@ -1,4 +1,4 @@
-import logo from '../logo.png'
+import logo from '../imgs/logo.png'
 import { Link } from 'react-router-dom'
 
 function Register(){

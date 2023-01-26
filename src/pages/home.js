@@ -1,6 +1,13 @@
+import Chats from "../components/chats"
+import Users from "../components/users"
+import Search from "../components/search"
 function Home(){
     return(
-        <p>Home</p>
+        <div className='home'>
+            <Search/>
+            <Chats/>
+            <Users/>
+        </div>
     )
 }
 

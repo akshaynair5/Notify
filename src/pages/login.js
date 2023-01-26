@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import logo from '../logo.png'
+import logo from '../imgs/logo.png'
 
 
 function Login(){
