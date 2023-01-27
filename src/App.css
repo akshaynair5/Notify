@@ -102,12 +102,37 @@ body{
 
 /* search bar up top */
 
-.search{
+.navbar{
   width:100%;
-  height: fit-content;
+  height:47px;
   justify-content: center;
   padding:1%;
+  background-color: #C7A003;
 }
+
 .search input{
   padding: 0.5%;
 }
+.home{
+  height: 100%;
+}
+/* Users section */
+
+.users{
+  top:10.5%;
+  position:fixed;
+  width:30%;
+  height: 90%;
+  background-color: #C7A003;
+  overflow-y: scroll;
+}
+
+.users .usertab{
+  width:95%;
+  margin: 2%;
+  height: 17%;
+  background-color: #EDE599;
+  border-radius: 20px;
+  display: flex;
+}
+
