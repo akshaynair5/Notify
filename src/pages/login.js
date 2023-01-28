@@ -1,25 +1,25 @@
-import { Link } from 'react-router-dom'
+import { Link, Navigate, useNavigate } from 'react-router-dom'
 import logo from '../imgs/logo.png'
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from '../firebase_config';
-
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import { useContext,useState } from 'react';
 
 function Login(){
-    const handleSubmit =(e)=>{
+    const [err,setErr] = useState(false)
+    const navigate = useNavigate()
+    const handleSubmit = async (e)=>{
+        e.preventDefault()
         const email = e.target[0].value
         const password = e.target[1].value
-        const name = e.target[2].value
-        createUserWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => {
-            // Signed in 
-            const user = userCredential.user;
-            // ...
-        })
-        .catch((error) => {
-            const errorCode = error.code;
-            const errorMessage = error.message;
-            // ..
-        });
+        try{
+            await signInWithEmailAndPassword(auth, email, password)
+            navigate("/home")
+
+        }catch(error){
+            setErr(true)
+        }
+
     }
     return(
         <form className="Form" onSubmit={(e)=>handleSubmit(e)}>
