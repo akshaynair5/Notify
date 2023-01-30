@@ -9,8 +9,8 @@ function UserInfo(prop){
         document.getElementById("popup1").style.visibility="hidden"
     }
     return(
-        <div className="popup" id="popup1" style={{visibility:prop.display,width:'15%',height:'900%',backgroundColor:'white',position:'relative',top:'150%',zIndex:'3',padding:'2%',borderRadius:'20px',left:'1%',paddingLeft:'3%',paddingRight:'3%'}}>
-            <img src={user} style={{height:'40%'}}></img>
+        <div className="popup" id="popup1" style={{visibility:prop.display,width:'15%',height:'900%',backgroundColor:'white',position:'absolute',top:'160%',padding:'2%',borderRadius:'20px',left:'0%',paddingLeft:'3%',paddingRight:'3%',zIndex:'3'}}>
+            <img src={currentUser.photoURL} style={{height:'40%'}}></img>
             <input onClick={()=>{handleClose()}}  type="button" value="X" style={{position:'absolute',left:'90%',backgroundColor:'transparent',border:'none',fontSize:'25px',cursor:'pointer'}}></input>
             <p style={{fontSize:'200%'}}>{currentUser.displayName}</p>
             <p style={{fontSize:'150%'}}>{currentUser.email}</p>

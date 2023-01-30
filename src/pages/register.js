@@ -17,36 +17,36 @@ function Register(){
         const email = e.target[1].value
         const password = e.target[2].value
         const displayName = e.target[0].value
-        const dp = e.target[4].value
+        const dp = e.target[3].files[0]
         const date = new Date().getTime();
         try{
             const res = await createUserWithEmailAndPassword(auth, email, password)
-                const storageRef = ref(storage,`${displayName+date}`)
-                    await uploadBytesResumable(storageRef, dp).then(() => {
-                        getDownloadURL(storageRef).then(async (downloadURL) => {
+            const storageRef = ref(storage,`${displayName+date}`)
+            await uploadBytesResumable(storageRef, dp).then(() => {
+                    getDownloadURL(storageRef).then(async (downloadURL) => {
                         try {
                             //Update profile
-                            await updateProfile(res.user, {
-                            displayName,
-                            photoURL: downloadURL,
+                                await updateProfile(res.user, {
+                                displayName,
+                                photoURL: downloadURL,
                             });
-                            //create user on firestore
+                                //create user on firestore
                             await setDoc(doc(db, "users", res.user.uid), {
-                            uid: res.user.uid,
-                            displayName,
-                            email,
-                            photoURL: downloadURL,
+                                uid: res.user.uid,
+                                displayName,
+                                email,
+                                photoURL: downloadURL,
                             });
-                
-                            //create empty user chats on firestore
+                            
+                                        //create empty user chats on firestore
                             await setDoc(doc(db, "userChats", res.user.uid), {});
                             navigate("/home");
                         } catch (err) {
                             console.log(err);
                             setErr(true);
                         }
-                        });
                     });
+                });
         }catch(error){
             setErr(true)
         }
@@ -58,9 +58,9 @@ function Register(){
             <input type="text" placeholder="Name"></input>
             <input type="email" placeholder="Email"></input>
             <input type="password" placeholder="Password"></input>
-            <input type='file' id='file' style={{display:'none'}}></input>
-            <label htmlFor='file'>Add profile photo</label>
-            <input type='submit' value='Register' className="button-35" style={{backgroundColor:'#8B9490'}}></input>
+            <input type='file' id='file1' style={{display:'none'}}></input>
+            <label htmlFor='file1'>Add profile photo</label>
+            <input type='submit' value='Register' className="button-35" style={{backgroundColor:'#1F2A2D',color:'white'}}></input>
             <div className='Navs' style={{display:'flex',flexDirection:'row'}}>
                 <p>Already have an Account? </p>
                 {err && <span>Something went wrong Try again!!,{err}</span>}

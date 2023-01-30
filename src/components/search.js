@@ -1,12 +1,14 @@
-import { signOut } from 'firebase/auth'
+import { signOut, updateCurrentUser } from 'firebase/auth'
 import settings from '../imgs/gear.png'
 import user from '../imgs/user.png'
 import { auth } from '../firebase_config'
 import UserInfo from "../components/popup"
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import { collection, getDocs, query, where } from "firebase/firestore";
 import { db } from '../firebase_config'
+import { Authcontext } from '../context/authcontext'
 function Navbar(){
+    const {currentUser} = useContext(Authcontext)
     const [searchFor,setSearch] = useState("")
     const [username,setUser] = useState(null)
     const [popupdisplay,setpopup] = useState("hidden")
@@ -35,22 +37,26 @@ function Navbar(){
             setpopup('hidden')
         }
     }
+    const handleChoice=()=>{
+        setUser(null)
+        setSearch("")
+    }
     return(
         <div className='navbar' style={{display:'flex',position:'fixed'}}>
-            <img src={user} onClick={()=>handlePopup1()}></img>
-            <UserInfo display={popupdisplay} style={{position:'relative'}}/>
-            <div className="search" style={{width:'85%',height:'100%'}}>
-                <input type='search' onChange={(e)=>setSearch(e.target.value)}  style={{height:'20%',position:'absolute',left:'20%',width:'55%',borderRadius:'20px'}} onKeyUp={(e)=>{handleEnter(e)}}></input>
-                <input type='button' onClick={()=>searching()} value='Search' style={{position:'absolute',left:'75.5%',height:'6%',borderRadius:'20px'}}></input>
-                {username && <div className="searchRes" style={{backgroundColor:'white',display:'flex',width:'51%',height:'fit-content',padding:'2%',position:'absolute',left:'50%',top:'120%',zIndex:'3',textAlign:'right'}} >
-                    <img src={username.PhotoURL}></img>
-                    <p>{username.displayName}</p>
+            <img src={currentUser.photoURL} onClick={()=>handlePopup1()}></img>
+            <UserInfo display={popupdisplay}/>
+            <div className="search" style={{width:'80%',height:'100%'}}>
+                <input type='search' onChange={(e)=>setSearch(e.target.value)}  style={{height:'60%',position:'absolute',left:'20%',width:'55%',borderRadius:'20px'}} onKeyUp={(e)=>{handleEnter(e)}} placeholder="Search for a User" value={searchFor}></input>
+                <input type='button' onClick={()=>searching()} value='Search' style={{position:'absolute',left:'75.5%',height:'60%',borderRadius:'20px'}}></input>
+                {username && <div className="searchRes" onClick={()=>handleChoice()} style={{backgroundColor:'white',display:'flex',width:'71%',height:'160%',padding:'2%',position:'relative',left:'-5%',top:'140%',zIndex:'3',textAlign:'right',display:'flex',borderRadius:'30px'}} >
+                    <img src={username.photoURL} style={{height:'130%'}}></img>
+                    <p style={{fontSize:'150%'}}>{username.displayName}</p>
                 </div>}
                 {Err && <div className='searchRes'>
                     <p>User not found</p>
                 </div>}
             </div>
-            <img src={settings}></img>
+            <img style={{left:'80%',position:'relative',left:'90%'}} src={settings}></img>
         </div>
     )
 }
