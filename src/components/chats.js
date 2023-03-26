@@ -1,31 +1,34 @@
 import { useContext } from "react"
 import { Authcontext } from "../context/authcontext"
+import settings from '../imgs/gear.png'
+import img from '../imgs/gallery.png'
 
 function Chats(){
     const {currentUser} = useContext(Authcontext)
     return(
-        <div>
-            <div className='chat' style={{position:'fixed',left:'32%',top:'15%',width:'68%',overflowY:'scroll',height:'78%'}}>
-                <div className='you' style={{backgroundColor:'#679076',fontSize:'150%',borderRadius:'25px',minWidth:'10%',height:'fit-content',whiteSpace: 'pre-wrap',maxWidth:'85%',wordWrap:'break-word',padding:'2%',margin:'3%',display:'flex'}}>
-                    <p>Hi</p>
-                    <img src={currentUser.photoURL} style={{width:'10%',position:'relative',left:'101%',top:'7%'}}></img>
+        <div className="chatbox">
+            <div className="chats">
+                <div className="Userchats">
+                    <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</span>
+                    <img id="udp" src={currentUser.photoURL}></img>
                 </div>
-                <div className='you' style={{backgroundColor:'#679076',fontSize:'150%',borderRadius:'25px',minWidth:'10%',height:'fit-content',whiteSpace: 'pre-wrap',maxWidth:'85%',wordWrap:'break-word',padding:'2%',margin:'3%',display:'flex'}}>
-                    <p>Hi</p>
-                    <img src={currentUser.photoURL} style={{width:'10%',position:'relative',left:'101%',top:'7%'}}></img>
+                <div className="Userchats">
+                    <img src={settings} style={{borderStyle:'solid',padding:'3%',height:'400px',width:'400px',borderRadius:'25px',marginTop:'0%',left:'18%'}}></img>
+                    <img id="udp" src={currentUser.photoURL}></img>
                 </div>
-                <div className='friend' style={{backgroundColor:'#107869',fontSize:'150%',borderRadius:'25px',minWidth:'10%',height:'fit-content',whiteSpace: 'pre-wrap',maxWidth:'85%',wordWrap:'break-word',padding:'2%',margin:'3%',display:'flex',left:'5%',position:'relative'}}>
-                    <img src={currentUser.photoURL} style={{width:'10%',position:'relative',top:'7%',left:'-12%'}}></img>
-                    <p>Hi</p>
+                <div className="friendchats">
+                    <img src={currentUser.photoURL}></img>
+                    <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</span>
                 </div>
-                <div className='friend' style={{backgroundColor:'#107869',fontSize:'150%',borderRadius:'25px',minWidth:'10%',height:'fit-content',whiteSpace: 'pre-wrap',maxWidth:'85%',wordWrap:'break-word',padding:'2%',margin:'3%',display:'flex',left:'5%',position:'relative'}}>
-                    <img src={currentUser.photoURL} style={{width:'10%',position:'relative',top:'7%',left:'-12%'}}></img>
-                    <p>Hi</p>
+                <div className="friendchats">
+                    <img src={currentUser.photoURL}></img>
+                    <img src={settings} style={{borderStyle:'solid',padding:'3%',height:'400px',width:'400px',borderRadius:'25px',marginTop:'0%'}}></img>
                 </div>
             </div>
-
-            <div style={{backgroundColor:"white",top:'30%',width:'70%'}}>
-                <input type='text' placeholder="Notify ...." style={{position:'absolute',bottom:'3%',padding:'1.5%',left:'35%',width:'50%',borderRadius:'25px'}}></input>
+            <div className="textbox">
+                <input type="text"></input>
+                <input type="file" id="sendPhotos" style={{visibility:'hidden'}}></input>
+                <label htmlFor="sendPhotos"><img src={img} style={{height:'50px'}}></img></label>
             </div>
         </div>
     )
