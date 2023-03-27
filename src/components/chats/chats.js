@@ -34,9 +34,9 @@ function Chats(){
 
     },[friendChat])
     const SendMessage=async()=>{
-        let temp = friendChat.text
-        temp = [...temp,{createdAt: firebase.firestore.FieldValue.serverTimestamp(),chat:`${message}`,user:`${currentUser.uid}`}]
-        await set
+        // let temp = friendChat.text
+        // temp = [...temp,{createdAt: firebase.firestore.FieldValue.serverTimestamp(),chat:`${message}`,user:`${currentUser.uid}`}]
+        // await set
     }
     return(
         <div className="chatbox">
