@@ -65,3 +65,7 @@
     border-radius: 50%;
     align-self: center;
 }
+.details .Add{
+    padding: 2%;
+    cursor: pointer;
+}

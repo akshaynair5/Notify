@@ -13,7 +13,25 @@ function Navbar(){
     const [SVis,setSVis] = useState(false)
     const {currentUser} = useContext(Authcontext)
     const eventRef = collection(db,"users")
-
+    const addFriend=async()=>{
+        const q=query(eventRef,where("uid","==",`${currentUser.uid}`))
+        const querySnapShot1 = await getDocs(q)
+        const temp = []
+        try{
+            querySnapShot1.forEach((doc)=>{
+                temp.push(doc.data())
+            })
+            let temp2 = temp[0].friends
+            temp2 = [...temp2,{uid:`${SUserDetails.uid}`,name:`${SUserDetails.displayName}`,photoURL:`${SUserDetails.photoURL}`}]
+            await updateDoc(doc(db,"users",`${currentUser.uid}`),{
+                friends:temp2,
+            }).then(()=>{
+                console.log("hii")
+            })
+        }catch(err){
+            console.log(err)
+        }
+    }
     const searchFor=async()=>{
         const q = query(eventRef,where("displayName","==",`${Search}`))
         const temp = []
@@ -43,6 +61,7 @@ function Navbar(){
                     <div className="details">
                         <div className="SName">{SUserDetails.displayName}</div>
                         <div className="SEmail">{SUserDetails.email}</div>
+                        <input type="button" className="Add" value="Add +" onClick={()=>addFriend()}></input>
                     </div>
                     
                 </div>

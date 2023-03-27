@@ -1,10 +1,10 @@
 import Chats from "../components/chats"
 import Users from "../components/users"
-import Search from "../components/search"
+import Navbar from "../components/Navbar/Navbar"
 function Home(){
     return(
         <div className='home'>
-            <Search/>
+            <Navbar/>
             <Chats/>
             <Users/>
         </div>

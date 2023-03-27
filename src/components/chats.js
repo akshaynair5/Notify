@@ -1,10 +1,31 @@
-import { useContext } from "react"
+import { useContext, useEffect, useState } from "react"
 import { Authcontext } from "../context/authcontext"
 import settings from '../imgs/gear.png'
 import img from '../imgs/gallery.png'
+import { collection, query, updateDoc, where } from "firebase/firestore";
+import { db } from "../firebase_config";
+import { getDocs, doc } from "firebase/firestore";
 
 function Chats(){
     const {currentUser} = useContext(Authcontext)
+    const eventRef = collection(db,"users")
+    const [friends,setFriends] = useState([])
+    const Fetchfriend = async()=>{
+        const q=query(eventRef,where("uid","==",`${currentUser.uid}`))
+        const querySnapShot1 = await getDocs(q)
+        const temp = []
+        try{
+            querySnapShot1.forEach((doc)=>{
+                temp.push(doc.data())
+            })
+            setFriends(temp[0].friends)
+        }catch(err){
+            console.log(err)
+        }
+    }
+    useEffect(()=>{
+        Fetchfriend()
+    })
     return(
         <div className="chatbox">
             <div className="chats">
@@ -13,7 +34,7 @@ function Chats(){
                     <img id="udp" src={currentUser.photoURL}></img>
                 </div>
                 <div className="Userchats">
-                    <img src={settings} style={{borderStyle:'solid',padding:'3%',height:'400px',width:'400px',borderRadius:'25px',marginTop:'0%',left:'18%'}}></img>
+                    <img id="img" src={settings}></img>
                     <img id="udp" src={currentUser.photoURL}></img>
                 </div>
                 <div className="friendchats">
