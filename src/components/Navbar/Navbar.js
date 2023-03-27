@@ -3,7 +3,7 @@ import { Authcontext } from "../../context/authcontext"
 import { auth } from "../../firebase_config";
 import { collection, query, updateDoc, where } from "firebase/firestore";
 import { db } from "../../firebase_config";
-import { getDocs, doc } from "firebase/firestore";
+import { getDocs, doc ,setDoc} from "firebase/firestore";
 import "./Navbar.css"
 import { signOut } from "firebase/auth";
 
@@ -12,9 +12,11 @@ function Navbar(){
     const [SUserDetails,setUDetails] = useState([])
     const [SVis,setSVis] = useState(false)
     const {currentUser} = useContext(Authcontext)
-    const eventRef = collection(db,"users")
+    const userRef = collection(db,"users")
+    const chatRef = collection(db,"userChats")
+
     const addFriend=async()=>{
-        const q=query(eventRef,where("uid","==",`${currentUser.uid}`))
+        const q=query(userRef,where("uid","==",`${currentUser.uid}`))
         const querySnapShot1 = await getDocs(q)
         const temp = []
         try{
@@ -25,15 +27,19 @@ function Navbar(){
             temp2 = [...temp2,{uid:`${SUserDetails.uid}`,name:`${SUserDetails.displayName}`,photoURL:`${SUserDetails.photoURL}`}]
             await updateDoc(doc(db,"users",`${currentUser.uid}`),{
                 friends:temp2,
-            }).then(()=>{
-                console.log("hii")
+            }).then(async()=>{
+                await setDoc(doc(db, "userChat", `${currentUser.uid}`+`${SUserDetails.uid}`), {
+                    text:[],
+                    photos:[],
+                    chatId:`${currentUser.uid}`+`${SUserDetails.uid}`
+                });
             })
         }catch(err){
             console.log(err)
         }
     }
     const searchFor=async()=>{
-        const q = query(eventRef,where("displayName","==",`${Search}`))
+        const q = query(userRef,where("displayName","==",`${Search}`))
         const temp = []
         const querySnapShot1 = await getDocs(q)
         try{

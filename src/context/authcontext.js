@@ -6,6 +6,7 @@ export const Authcontext = createContext()
 
 export const AuthContextProvider =({children})=>{
     const [currentUser,setCurrentUser] = useState({})
+    const [currentfriend,setcf] = useState({})
 
     useEffect(()=>{
         const unsub = onAuthStateChanged(auth,(user)=>{
@@ -20,7 +21,7 @@ export const AuthContextProvider =({children})=>{
     //     {children}
     // </AuthContext.Provider>
     return(
-        <Authcontext.Provider value={{currentUser}}>
+        <Authcontext.Provider value={{currentUser,currentfriend,setcf}}>
             {children}
         </Authcontext.Provider>
     )

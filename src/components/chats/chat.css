@@ -1,0 +1,86 @@
+.chatbox{
+    position: absolute;
+    left:30%;
+    top:10%;
+    width:70%;
+    /* background-color: #121212; */
+    height: 90%;
+  }
+  .textbox{
+    position: fixed;
+    top:88%;
+    height: 6%;
+    background-color: #fff;
+    width: 70%;
+    padding:1.25%;
+    display: flex;
+  }
+  .textbox .Main{
+    width: 70%;
+  }
+  .textbox .SendMessage{
+    width: 10%;
+    position: relative;
+    left:2%;
+  }
+  .chats{
+    position: fixed;
+    height: 72%;
+    overflow-y: scroll;
+    padding: 2%;
+  }
+  .chats .Userchats{
+    display: flex;
+    position: static;
+    right: 0%;
+    margin: 1%;
+  }
+  .chats .Userchats span{
+    background-color: #3E535A;
+    margin: 2%;
+    margin-left: 18%;
+    margin-right: 0%;
+    border-radius: 25px;
+    padding: 3%;
+    min-width: 10%;
+    font-size: 150%;
+  }
+  .chats .Userchats #img{
+    position: relative;
+    right: 0%;
+  }
+  .chats .Userchats img{
+    width: 50%;
+    height: 290px;
+    position: static;
+    right: 0%;
+    margin-top: 13%;
+  }
+  #udp{
+    height: 10%;
+    width: 5%;
+    position: static;
+    top:95%
+  }
+  
+  
+  .chats .friendchats{
+    display: flex;
+  }
+  .chats .friendchats span{
+    background-color: #3E535A;
+    margin: 2%;
+    margin-left: 0%;
+    margin-right: 18%;
+    border-radius: 25px;
+    padding: 3%;
+    min-width: 10%;
+    font-size: 150%;
+  }
+  .chats .friendchats img{
+    width: 130px;
+    height: 100px;
+    position: static;
+    left: 0%;
+    margin-top: 13%;
+  }

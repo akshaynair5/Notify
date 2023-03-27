@@ -1,4 +1,4 @@
-import Chats from "../components/chats"
+import Chats from "../components/chats/chats"
 import Users from "../components/users"
 import Navbar from "../components/Navbar/Navbar"
 function Home(){

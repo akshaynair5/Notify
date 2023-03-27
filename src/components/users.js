@@ -8,6 +8,7 @@ function Users(){
     const {currentUser} = useContext(Authcontext)
     const eventRef = collection(db,"users")
     const [friends,setFriends] = useState([])
+    const {currentfriend,setcf} = useContext(Authcontext)
     const Fetchfriend = async()=>{
         const q=query(eventRef,where("uid","==",`${currentUser.uid}`))
         const querySnapShot1 = await getDocs(q)
@@ -28,7 +29,7 @@ function Users(){
         <div className='users' style={{position:'fixed',top:'10%'}}>
             {
                 friends.map((friends)=>(
-                    <div className='usertab' style={{}}>
+                    <div className='usertab' onClick={()=>setcf({friends})}>
                         <img src={friends.photoURL} style={{height:'68%',margin:'3%',marginTop:'4%'}}></img>
                         <p style={{position:'relative',top:'10%',left:'8%',fontSize:'160%',fontSize:'160%'}}>{friends.name}</p>
                     </div>
