@@ -1,0 +1,67 @@
+.Navbar{
+    background-color: black;
+    width: 100%;
+    height: 10%;
+    display: flex;
+    position: fixed;
+}
+.Navbar .dp{
+    height: 60%;
+    align-self: center;
+    padding: 1%;
+    cursor: pointer;
+    border-radius: 50%;
+}
+.Navbar .search{
+    position: relative;
+    left: 20%;
+    width: 50%;
+    top:20%;
+    height: 60%;
+    border-radius: 25px;
+}
+.Navbar .Sbtn{
+    position: relative;
+    width: 10%;
+    height: 60%;
+    left: 22%;
+    background-color: aliceblue;
+    border-radius: 25px;
+    text-align: center;
+    top:20%;
+    cursor: pointer;
+}
+.searchPopUp{
+    cursor: pointer;
+    position: absolute;
+    width: 45%;
+    background-color: blue;
+    left: 25%;
+    top:12%;
+    z-index: 3;
+    height: 20%;
+    border-radius: 25px;
+    padding: 2%;
+    display: flex;
+}
+
+.searchPopUp .SName{
+    position: relative;
+    left: 20%;
+    font-size: 250%;
+    margin-top: 3%;
+}
+.searchPopUp .SEmail{
+    position: relative;
+    left: 20%;
+    font-size: 250%;
+    margin-top: 3%;
+}
+.searchPopUp .details{
+    align-self: center;
+}
+.searchPopUp img{
+    height: 80%;
+    border-radius: 50%;
+    align-self: center;
+}
