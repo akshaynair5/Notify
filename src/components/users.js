@@ -29,7 +29,7 @@ function Users(){
         <div className='users' style={{position:'fixed',top:'10%'}}>
             {
                 friends.map((friends)=>(
-                    <div className='usertab' onClick={()=>setcf({friends})}>
+                    <div className='usertab' onClick={()=>setcf(friends)}>
                         <img src={friends.photoURL} style={{height:'68%',margin:'3%',marginTop:'4%'}}></img>
                         <p style={{position:'relative',top:'10%',left:'8%',fontSize:'160%',fontSize:'160%'}}>{friends.name}</p>
                     </div>

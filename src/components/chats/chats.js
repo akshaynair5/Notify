@@ -13,7 +13,7 @@ function Chats(){
     const eventRef = collection(db,"userChat")
     const [friendChat,setFChat] = useState([])
     const {currentfriend,setcf} = useContext(Authcontext)
-    const Fetchfriend = async()=>{
+    const FetchfriendChat = async()=>{
         const q=query(eventRef,where("chatId","==",`${currentUser.uid}`+`${currentfriend.uid}`||`${currentfriend.uid}`+`${currentUser.uid}`))
         const querySnapShot1 = await getDocs(q)
         const temp = []
@@ -21,22 +21,26 @@ function Chats(){
             querySnapShot1.forEach((doc)=>{
                 temp.push(doc.data())
             })
-            setFChat(temp[0].friends)
+            setFChat(temp[0])
         }catch(err){
             console.log(err)
         }
-        console.log(currentfriend)
     }
     useEffect(()=>{
-        Fetchfriend()
+        FetchfriendChat()
     })
-    useEffect(()=>{
-
-    },[friendChat])
+    // useEffect(()=>{
+    //     console.log(currentfriend)
+    // },[currentfriend])
     const SendMessage=async()=>{
-        // let temp = friendChat.text
-        // temp = [...temp,{createdAt: firebase.firestore.FieldValue.serverTimestamp(),chat:`${message}`,user:`${currentUser.uid}`}]
-        // await set
+        console.log(friendChat)
+        let temp = friendChat.text
+        temp = [...temp,{chat:`${message}`,user:`${currentUser.uid}`}]
+        await updateDoc(doc(db,"userChat",`${currentUser.uid}`+`${currentfriend.uid}`||`${currentfriend.uid}`+`${currentUser.uid}`),{
+            text:temp
+        }).then(()=>{
+            console.log("Hii")
+        })
     }
     return(
         <div className="chatbox">
@@ -45,10 +49,13 @@ function Chats(){
                     <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</span>
                     <img id="udp" src={currentUser.photoURL}></img>
                 </div>
-                <div className="friendchats">
-                    <img src={currentfriend.friends.photoURL}></img>
-                    <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</span>
-                </div>
+                {/* {
+                    currentfriend.friends.photoURL &&
+                    <div className="friendchats">
+                        <img src={currentfriend.friends.photoURL}></img>
+                        <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</span>
+                    </div>
+                } */}
             </div>
             <div className="textbox">
                 <input type="text" className="Main" onChange={(e)=>{setmessage(e.target.value)}}></input>
