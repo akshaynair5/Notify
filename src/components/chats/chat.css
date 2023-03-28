@@ -1,9 +1,8 @@
 .chatbox{
-    position: absolute;
+    position: fixed;
     left:30%;
     top:10%;
     width:70%;
-    /* background-color: #121212; */
     height: 90%;
   }
   .textbox{
@@ -24,38 +23,38 @@
     left:2%;
   }
   .chats{
-    position: fixed;
-    height: 72%;
+    width: 100%;
+    position: absolute;
+    /* background-color: #3E535A;
+    z-index: 4; */
+    height: 100%;
     overflow-y: scroll;
     padding: 2%;
+    
   }
   .chats .Userchats{
     display: flex;
-    position: static;
-    right: 0%;
-    margin: 1%;
+    min-height: 10%;
+    justify-content: end;
+    margin-bottom: 1.5%;
   }
   .chats .Userchats span{
     background-color: #3E535A;
-    margin: 2%;
-    margin-left: 18%;
-    margin-right: 0%;
-    border-radius: 25px;
-    padding: 3%;
-    min-width: 10%;
-    font-size: 150%;
+    height: max-content;
+    padding: 2%;
+    border-radius: 20px;
   }
-  .chats .Userchats #img{
-    position: relative;
-    right: 0%;
+  .chats .Userchats #udp{
+    margin-left: 1%;
+    border-radius: 50%;
   }
-  .chats .Userchats img{
+  /* .chats .Userchats img{
     width: 50%;
     height: 290px;
     position: static;
     right: 0%;
     margin-top: 13%;
-  }
+  } */
   #udp{
     height: 10%;
     width: 5%;

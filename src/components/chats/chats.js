@@ -11,7 +11,7 @@ function Chats(){
     const {currentUser} = useContext(Authcontext)
     const [message,setmessage] = useState("")
     const eventRef = collection(db,"userChat")
-    const [friendChat,setFChat] = useState([])
+    const [friendChat,setFChat] = useState([{text:[],photos:[],user:''}])
     const {currentfriend,setcf} = useContext(Authcontext)
     const FetchfriendChat = async()=>{
         const q=query(eventRef,where("chatId","==",`${currentUser.uid}`+`${currentfriend.uid}`||`${currentfriend.uid}`+`${currentUser.uid}`))
@@ -46,7 +46,7 @@ function Chats(){
     return(
         <div className="chatbox">
             <div className="chats">
-                {friendChat &&
+                {/* {
                     friendChat.text.map((chat)=>{
                         if(chat.user==`${currentUser.uid}`){
                             return(
@@ -65,7 +65,7 @@ function Chats(){
                                 )
                         }
                     })
-                }
+                } */}
             </div>
             <div className="textbox">
                 <input type="text" className="Main" onChange={(e)=>{setmessage(e.target.value)}}></input>
