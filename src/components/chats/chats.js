@@ -22,6 +22,7 @@ function Chats(){
                 temp.push(doc.data())
             })
             setFChat(temp[0])
+            console.log(temp)
         }catch(err){
             console.log(err)
         }
@@ -45,17 +46,26 @@ function Chats(){
     return(
         <div className="chatbox">
             <div className="chats">
-                <div className="Userchats">
-                    <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</span>
-                    <img id="udp" src={currentUser.photoURL}></img>
-                </div>
-                {/* {
-                    currentfriend.friends.photoURL &&
-                    <div className="friendchats">
-                        <img src={currentfriend.friends.photoURL}></img>
-                        <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</span>
-                    </div>
-                } */}
+                {friendChat &&
+                    friendChat.text.map((chat)=>{
+                        if(chat.user==`${currentUser.uid}`){
+                            return(
+                                <div className="Userchats">
+                                    <span>{chat.chat}</span>
+                                    <img id="udp" src={currentUser.photoURL}></img>
+                                </div>
+                            )
+                        }
+                        else if(chat.user==`${currentfriend.uid}`){
+                                return(
+                                    <div className="friendchats">
+                                        <img src={currentfriend.friends.photoURL}></img>
+                                        <span>{chat.chat}</span>
+                                    </div>
+                                )
+                        }
+                    })
+                }
             </div>
             <div className="textbox">
                 <input type="text" className="Main" onChange={(e)=>{setmessage(e.target.value)}}></input>
