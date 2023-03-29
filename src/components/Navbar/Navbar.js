@@ -3,7 +3,7 @@ import { Authcontext } from "../../context/authcontext"
 import { auth } from "../../firebase_config";
 import { collection, query, updateDoc, where } from "firebase/firestore";
 import { db } from "../../firebase_config";
-import { getDocs, doc ,setDoc} from "firebase/firestore";
+import { getDocs, doc ,setDoc,addDoc} from "firebase/firestore";
 import "./Navbar.css"
 import { signOut } from "firebase/auth";
 
@@ -19,6 +19,9 @@ function Navbar(){
         const q=query(userRef,where("uid","==",`${currentUser.uid}`))
         const querySnapShot1 = await getDocs(q)
         const temp = []
+        const q1=query(userRef,where("uid","==",`${SUserDetails.uid}`))
+        const querySnapShot2 = await getDocs(q1)
+        const temp1 = []
         try{
             querySnapShot1.forEach((doc)=>{
                 temp.push(doc.data())
@@ -33,6 +36,18 @@ function Navbar(){
                     photos:[],
                     chatId:`${currentUser.uid}`+`${SUserDetails.uid}`
                 });
+            })
+        }catch(err){
+            console.log(err)
+        }
+        try{
+            querySnapShot1.forEach((doc)=>{
+                temp1.push(doc.data())
+            })
+            let temp2 = temp1[0].friends
+            temp2 = [...temp2,{uid:`${currentUser.uid}`,name:`${currentUser.displayName}`,photoURL:`${currentUser.photoURL}`}]
+            await updateDoc(doc(db,"users",`${SUserDetails.uid}`),{
+                friends:temp2,
             })
         }catch(err){
             console.log(err)

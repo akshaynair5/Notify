@@ -46,7 +46,7 @@ function Chats(){
     return(
         <div className="chatbox">
             <div className="chats">
-                {/* {
+                {
                     friendChat.text.map((chat)=>{
                         if(chat.user==`${currentUser.uid}`){
                             return(
@@ -65,7 +65,7 @@ function Chats(){
                                 )
                         }
                     })
-                } */}
+                }
             </div>
             <div className="textbox">
                 <input type="text" className="Main" onChange={(e)=>{setmessage(e.target.value)}}></input>

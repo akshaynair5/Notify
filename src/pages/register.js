@@ -39,8 +39,7 @@ function Register(){
                                 friends:[]
                             });
                             
-                                        //create empty user chats on firestore
-                            await setDoc(doc(db, "userChats", res.user.uid), {});
+                            //create empty user chats on firestore
                             navigate("/home");
                         } catch (err) {
                             console.log(err);
