@@ -18,6 +18,9 @@ function Users(){
                 temp.push(doc.data())
             })
             setFriends(temp[0].friends)
+            await updateDoc(doc(db,"users",`${currentUser.uid}`),{
+                currentfriend
+            })
         }catch(err){
             console.log(err)
         }
@@ -25,6 +28,9 @@ function Users(){
     useEffect(()=>{
         Fetchfriend()
     })
+    useEffect(()=>{
+
+    },[currentfriend])
     return(
         <div className='users' style={{position:'fixed',top:'10%'}}>
             {
