@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from "react"
 import { Authcontext } from "../../context/authcontext"
 import settings from '../../imgs/gear.png'
 import img from '../../imgs/gallery.png'
-import { collection, query, updateDoc, where } from "firebase/firestore";
+import { collection, query, updateDoc, where ,or,and} from "firebase/firestore";
 import { db } from "../../firebase_config";
 import { getDocs, doc } from "firebase/firestore";
 import "./chat.css"
@@ -14,7 +14,7 @@ function Chats(){
     const [friendChat,setFChat] = useState([{text:[],photos:[],user:''}])
     const {currentfriend,setcf} = useContext(Authcontext)
     const FetchfriendChat = async()=>{
-        const q=query(eventRef,where("chatId","==",`${currentUser.uid}`+`${currentfriend.uid}`||`${currentfriend.uid}`+`${currentUser.uid}`))
+        const q=query(eventRef,or(where("chatId","==",`${currentUser.uid}`+`${currentfriend.uid}`),where("chatId","==",`${currentfriend.uid}`+`${currentUser.uid}`)))
         const querySnapShot1 = await getDocs(q)
         const temp = []
         try{
@@ -37,7 +37,7 @@ function Chats(){
         console.log(friendChat)
         let temp = friendChat.text
         temp = [...temp,{chat:`${message}`,user:`${currentUser.uid}`}]
-        await updateDoc(doc(db,"userChat",`${currentUser.uid}`+`${currentfriend.uid}`||`${currentfriend.uid}`+`${currentUser.uid}`),{
+        await updateDoc(doc(db,"userChat",`${friendChat.chatId}`),{
             text:temp
         }).then(()=>{
             console.log("Hii")
@@ -46,7 +46,7 @@ function Chats(){
     return(
         <div className="chatbox">
             <div className="chats">
-                {
+                {/* {
                     friendChat.text.map((chat)=>{
                         if(chat.user==`${currentUser.uid}`){
                             return(
@@ -65,7 +65,7 @@ function Chats(){
                                 )
                         }
                     })
-                }
+                } */}
             </div>
             <div className="textbox">
                 <input type="text" className="Main" onChange={(e)=>{setmessage(e.target.value)}}></input>
