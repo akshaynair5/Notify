@@ -29,14 +29,15 @@ function Chats(){
     }
     useEffect(()=>{
         FetchfriendChat()
-    })
+    },[])
     // useEffect(()=>{
     //     console.log(currentfriend)
     // },[currentfriend])
     const SendMessage=async()=>{
+        var now = new Date().getTime()
         console.log(friendChat)
         let temp = friendChat.text
-        temp = [...temp,{chat:`${message}`,user:`${currentUser.uid}`}]
+        temp = [...temp,{chat:`${message}`,user:`${currentUser.uid}`,timestamp:`${now}`}]
         await updateDoc(doc(db,"userChat",`${friendChat.chatId}`),{
             text:temp
         }).then(()=>{
@@ -46,7 +47,7 @@ function Chats(){
     return(
         <div className="chatbox">
             <div className="chats">
-                {
+                {/* {
                     friendChat.text.map((chat)=>{
                         if(chat.user==`${currentUser.uid}`){
                             return(
@@ -65,7 +66,7 @@ function Chats(){
                                 )
                         }
                     })
-                }
+                } */}
             </div>
             <div className="textbox">
                 <input type="text" className="Main" onChange={(e)=>{setmessage(e.target.value)}}></input>
