@@ -18,24 +18,28 @@ function Users(){
                 temp.push(doc.data())
             })
             setFriends(temp[0].friends)
-            await updateDoc(doc(db,"users",`${currentUser.uid}`),{
-                currentfriend
-            })
         }catch(err){
             console.log(err)
         }
     }
     useEffect(()=>{
         Fetchfriend()
-    })
-    useEffect(()=>{
+    },[])
+    // useEffect(()=>{
 
-    },[currentfriend])
+    // },[currentfriend])
+    const setCurrentfriend= async(friends)=>{
+        await updateDoc(doc(db,"users",`${currentUser.uid}`),{
+            currentfriend:{friends},
+        })
+        console.log(friends)
+        setcf(friends)
+    }
     return(
         <div className='users' style={{position:'fixed',top:'10%'}}>
             {
                 friends.map((friends)=>(
-                    <div className='usertab' onClick={()=>setcf(friends)}>
+                    <div className='usertab' onClick={()=>setCurrentfriend(friends)}>
                         <img src={friends.photoURL} style={{height:'68%',margin:'3%',marginTop:'4%'}}></img>
                         <p style={{position:'relative',top:'10%',left:'8%',fontSize:'160%',fontSize:'160%'}}>{friends.name}</p>
                     </div>
