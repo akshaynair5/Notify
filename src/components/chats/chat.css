@@ -68,18 +68,11 @@
   }
   .chats .friendchats span{
     background-color: #3E535A;
-    margin: 2%;
-    margin-left: 0%;
-    margin-right: 18%;
-    border-radius: 25px;
-    padding: 3%;
-    min-width: 10%;
-    font-size: 150%;
+    height: max-content;
+    padding: 2%;
+    border-radius: 20px;
   }
-  .chats .friendchats img{
-    width: 130px;
-    height: 100px;
-    position: static;
-    left: 0%;
-    margin-top: 13%;
+  .chats .friendchats  #udp{
+    margin-right: 1%;
+    border-radius: 50%;
   }

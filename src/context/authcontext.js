@@ -24,25 +24,26 @@ export const AuthContextProvider =({children})=>{
     //         console.log(err)
     //     }
     // }
+    const eventRef = collection(db,"users")
+    const fetchFriend=async(user)=>{
+        const q=query(eventRef,where("uid","==",`${user.uid}`))
+        const querySnapShot1 = await getDocs(q)
+        const temp = []
+        try{
+            querySnapShot1.forEach((doc)=>{
+                temp.push(doc.data())
+            })
+            setcf(temp[0].currentfriend.friends)
+        }catch(err){
+            console.log(err)
+        }
+    }
     useEffect(()=>{
         const unsub = onAuthStateChanged(auth,(user)=>{
             setCurrentUser(user)
+            // console.log(user)
+            fetchFriend(user);
         })
-        const eventRef = collection(db,"users")
-        const fetchFriend=async()=>{
-            const q=query(eventRef,where("uid","==",`${currentUser.uid}`))
-            const querySnapShot1 = await getDocs(q)
-            const temp = []
-            try{
-                querySnapShot1.forEach((doc)=>{
-                    temp.push(doc.data())
-                })
-                setcf(temp[0].currentfriend)
-            }catch(err){
-                console.log(err)
-            }
-        }
-        fetchFriend();
         // fetchFriend()
 
         return ()=>{

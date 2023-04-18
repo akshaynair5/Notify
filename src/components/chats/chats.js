@@ -11,8 +11,9 @@ function Chats(){
     const {currentUser} = useContext(Authcontext)
     const [message,setmessage] = useState("")
     const eventRef = collection(db,"userChat")
-    const [friendChat,setFChat] = useState([{text:[],photos:[],user:''}])
+    const [friendChat,setFChat] = useState([])
     const {currentfriend,setcf} = useContext(Authcontext)
+    const [chatview,setcv] = useState('none')
     const FetchfriendChat = async()=>{
         const q=query(eventRef,or(where("chatId","==",`${currentUser.uid}`+`${currentfriend.uid}`),where("chatId","==",`${currentfriend.uid}`+`${currentUser.uid}`)))
         const querySnapShot1 = await getDocs(q)
@@ -21,7 +22,7 @@ function Chats(){
             querySnapShot1.forEach((doc)=>{
                 temp.push(doc.data())
             })
-            setFChat(temp[0])
+            setFChat(temp[0].text)
             console.log(temp)
         }catch(err){
             console.log(err)
@@ -30,9 +31,13 @@ function Chats(){
     useEffect(()=>{
         FetchfriendChat()
     },[])
-    // useEffect(()=>{
-    //     console.log(currentfriend)
-    // },[currentfriend])
+    useEffect(()=>{
+        console.log(currentfriend)
+    },[currentfriend])
+    useEffect(()=>{
+        console.log(friendChat)
+    },[friendChat])
+
     const SendMessage=async()=>{
         var now = new Date().getTime()
         console.log(friendChat)
@@ -47,8 +52,8 @@ function Chats(){
     return(
         <div className="chatbox">
             <div className="chats">
-                {/* {
-                    friendChat.text.map((chat)=>{
+                {friendChat &&
+                    friendChat.map((chat)=>{
                         if(chat.user==`${currentUser.uid}`){
                             return(
                                 <div className="Userchats">
@@ -60,13 +65,13 @@ function Chats(){
                         else if(chat.user==`${currentfriend.uid}`){
                                 return(
                                     <div className="friendchats">
-                                        <img src={currentfriend.friends.photoURL}></img>
+                                        <img src={currentfriend.photoURL} id="udp"></img>
                                         <span>{chat.chat}</span>
                                     </div>
                                 )
                         }
                     })
-                } */}
+                }
             </div>
             <div className="textbox">
                 <input type="text" className="Main" onChange={(e)=>{setmessage(e.target.value)}}></input>

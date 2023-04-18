@@ -31,8 +31,8 @@ function Users(){
     const setCurrentfriend= async(friends)=>{
 
         try{
-            await updateDoc(doc(db,"users",`${currentUser.uid}`),{
-                currentfriend:{friends},
+            await updateDoc(currentUser.uid,{
+                currentfriend:friends,
             })
         }catch(err){
             console.log(err)
