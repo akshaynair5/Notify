@@ -29,11 +29,16 @@ function Users(){
 
     // },[currentfriend])
     const setCurrentfriend= async(friends)=>{
-        await updateDoc(doc(db,"users",`${currentUser.uid}`),{
-            currentfriend:{friends},
-        })
+
+        try{
+            await updateDoc(doc(db,"users",`${currentUser.uid}`),{
+                currentfriend:{friends},
+            })
+        }catch(err){
+            console.log(err)
+        }
         console.log(friends)
-        setcf(friends)
+        setcf(friends);
     }
     return(
         <div className='users' style={{position:'fixed',top:'10%'}}>
