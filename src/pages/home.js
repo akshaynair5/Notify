@@ -1,5 +1,5 @@
 import Chats from "../components/chats/chats"
-import Users from "../components/users"
+import Users from "../components/users/users"
 import Navbar from "../components/Navbar/Navbar"
 import { useEffect } from "react"
 function Home(){

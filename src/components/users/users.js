@@ -1,9 +1,9 @@
-import user from '../imgs/user.png'
 import { collection, query, updateDoc, where } from "firebase/firestore";
-import { db } from "../firebase_config";
+import { db } from "../../firebase_config";
 import { getDocs, doc } from "firebase/firestore";
 import { useContext, useEffect, useState } from "react"
-import { Authcontext } from "../context/authcontext"
+import { Authcontext } from "../../context/authcontext"
+import './users.css'
 function Users(){
     const {currentUser} = useContext(Authcontext)
     const eventRef = collection(db,"users")
@@ -26,7 +26,6 @@ function Users(){
         Fetchfriend()
     },[])
     // useEffect(()=>{
-
     // },[currentfriend])
     const setCurrentfriend= async(friends)=>{
 
@@ -45,7 +44,7 @@ function Users(){
             {
                 friends.map((friends)=>(
                     <div className='usertab' onClick={()=>setCurrentfriend(friends)}>
-                        <img src={friends.photoURL} style={{height:'68%',margin:'3%',marginTop:'4%'}}></img>
+                        <img src={friends.photoURL}></img>
                         <p style={{position:'relative',top:'10%',left:'8%',fontSize:'160%',fontSize:'160%'}}>{friends.name}</p>
                     </div>
                 ))

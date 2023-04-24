@@ -13,23 +13,35 @@
     border-radius: 50%;
 }
 .Navbar .search{
-    position: relative;
-    left: 20%;
+    align-self: center;
     width: 50%;
-    top:20%;
     height: 60%;
     border-radius: 25px;
+    padding-left: 3%;
+    font-size: 20px;
 }
 .Navbar .Sbtn{
-    position: relative;
+    margin-left: 1%;
+    align-self: center;
     width: 10%;
     height: 60%;
-    left: 22%;
     background-color: aliceblue;
     border-radius: 25px;
     text-align: center;
-    top:20%;
     cursor: pointer;
+    padding: 0.5%;
+    border-width: 4px;
+    border-style: solid;
+    border-color: aqua;
+    background-color: transparent;
+    color:white;
+    font-weight: 600;
+    font-size: 15px;
+    transition: 0.5s ease;
+}
+.Navbar .Sbtn:hover{
+    background-color: aliceblue;
+    color:black;
 }
 .searchPopUp{
     cursor: pointer;

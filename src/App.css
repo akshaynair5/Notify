@@ -120,30 +120,4 @@ body{
   display: flex;
   flex-direction: row;
 }
-/* Users section */
 
-.users{
-  top:10.5%;
-  position:fixed;
-  width:30%;
-  height: 90%;
-  background-color: #96C0CE;
-  overflow-y: scroll;
-}
-
-.users .usertab{
-  position: static;
-  width:95%;
-  margin: 2%;
-  height: 17%;
-  background-color: #3E535A;
-  border-radius: 20px;
-  display: flex;
-}
-
-/* popup windows */
-/* .popup{
-  z-index: 3;
-} */
-
-/* Chatbox css */

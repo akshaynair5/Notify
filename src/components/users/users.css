@@ -1,0 +1,34 @@
+.users{
+    width:30%;
+    height: 90%;
+    background-color:rgb(15, 15, 15);
+    overflow-y: scroll;
+  }
+  .users .usertab{
+    width:95%;
+    margin: 2%;
+    height: 15%;
+    background-color: #3E535A;
+    border-radius: 20px;
+    display: flex;
+    text-align: center;
+  }
+  .users .usertab img{
+    height: 70%;
+    align-self: center;
+    border-radius: 15px;
+    margin-left: 2%;
+
+  }
+  .users::-webkit-scrollbar {
+    width: 8px;               /* width of the entire scrollbar */
+  }
+  
+  .users::-webkit-scrollbar-track {
+    background: transparent;        /* color of the tracking area */
+  }
+  
+  .users::-webkit-scrollbar-thumb {
+    background-color: gray;    /* color of the scroll thumb */
+    border-radius: 20px;       /* roundness of the scroll thumb */
+  }
