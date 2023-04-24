@@ -12,6 +12,7 @@ function Chats(){
     const [message,setmessage] = useState("")
     const eventRef = collection(db,"userChat")
     const [friendChat,setFChat] = useState([])
+    const [FchatId,setFID] = useState([]);
     const {currentfriend,setcf} = useContext(Authcontext)
     const [chatview,setcv] = useState('none')
     const FetchfriendChat = async()=>{
@@ -23,6 +24,7 @@ function Chats(){
                 temp.push(doc.data())
             })
             setFChat(temp[0].text)
+            setFID(temp[0])
             console.log(temp)
         }catch(err){
             console.log(err)
@@ -40,10 +42,9 @@ function Chats(){
 
     const SendMessage=async()=>{
         var now = new Date().getTime()
-        console.log(friendChat)
-        let temp = friendChat.text
+        let temp = friendChat
         temp = [...temp,{chat:`${message}`,user:`${currentUser.uid}`,timestamp:`${now}`}]
-        await updateDoc(doc(db,"userChat",`${friendChat.chatId}`),{
+        await updateDoc(doc(db,"userChat",`${FchatId.chatId}`),{
             text:temp
         }).then(()=>{
             console.log("Hii")
