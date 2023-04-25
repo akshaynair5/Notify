@@ -13,12 +13,18 @@
     border-radius: 50%;
 }
 .Navbar .search{
+    border-width: 2px;
+    border-style: solid;
+    border-color: aqua;
+    background-color: transparent;
+    padding-left: 2%;
     align-self: center;
     width: 50%;
     height: 60%;
     border-radius: 25px;
     padding-left: 3%;
     font-size: 20px;
+    color: aliceblue;
 }
 .Navbar .Sbtn{
     margin-left: 1%;
@@ -30,7 +36,7 @@
     text-align: center;
     cursor: pointer;
     padding: 0.5%;
-    border-width: 4px;
+    border-width: 2px;
     border-style: solid;
     border-color: aqua;
     background-color: transparent;
@@ -40,44 +46,59 @@
     transition: 0.5s ease;
 }
 .Navbar .Sbtn:hover{
-    background-color: aliceblue;
+    background-color:cadetblue;
     color:black;
 }
-.searchPopUp{
-    cursor: pointer;
-    position: absolute;
-    width: 45%;
-    background-color: blue;
-    left: 25%;
-    top:12%;
+.popupdiv{
+    position: fixed;
+    height:100%;
+    width:100%;
     z-index: 3;
-    height: 20%;
-    border-radius: 25px;
-    padding: 2%;
+    background-color: rgba(0, 0, 0, 0.456);
+}
+.searchPopUp{
+    background-color: cadetblue;
+    width:50%;
+    height: 30%;
     display: flex;
+    border-radius: 20px;
+    position: absolute;
+    top:10%;
+    left:6%;
 }
 
 .searchPopUp .SName{
     position: relative;
     left: 20%;
-    font-size: 250%;
+    font-size: 35px;
     margin-top: 3%;
 }
 .searchPopUp .SEmail{
     position: relative;
     left: 20%;
-    font-size: 250%;
-    margin-top: 3%;
+    font-size: 27px;
+    margin-top: 2%;
 }
 .searchPopUp .details{
     align-self: center;
 }
 .searchPopUp img{
-    height: 80%;
+    height: 70%;
     border-radius: 50%;
+    margin-left: 2%;
+    margin-right: 2%;
     align-self: center;
 }
 .details .Add{
     padding: 2%;
     cursor: pointer;
+    background-color: black;
+    color: white;
+    padding: 5%;
+    border-radius: 15px;
+    border-width: 2px ;
+    border-style: solid;
+    border-color: aqua;
+    margin-top: 5%;
+    margin-left: 20%;
 }

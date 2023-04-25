@@ -72,19 +72,21 @@ function Navbar(){
         <>
             <div className="Navbar">
                 <img src={currentUser.photoURL} className="dp" onClick={()=>{signOut(auth)}}></img>
-                <input type="text" className="search" onChange={(e)=>{setSearch(e.target.value)}}></input>
+                <input type="text" className="search" onChange={(e)=>{setSearch(e.target.value)}} placeholder="Search for users"></input>
                 <input type="button" value="Search" className="Sbtn" onClick={()=>searchFor()}></input>
             </div>
             {
                 SVis &&
-                <div className="searchPopUp" onClick={()=>setSVis(false)}>
-                    <img src={SUserDetails.photoURL}></img>
-                    <div className="details">
-                        <div className="SName">{SUserDetails.displayName}</div>
-                        <div className="SEmail">{SUserDetails.email}</div>
-                        <input type="button" className="Add" value="Add +" onClick={()=>addFriend()}></input>
+                <div className="popupdiv" onClick={()=>setSVis(false)}>
+                    <div className="searchPopUp">
+                        <img src={SUserDetails.photoURL} style={{borderWidth:'1px',borderStyle:'solid',borderColor:'white'}}></img>
+                        <div className="details">
+                            <div className="SName">{SUserDetails.displayName}</div>
+                            <div className="SEmail">{SUserDetails.email}</div>
+                            <input type="button" className="Add" value="Add +" onClick={()=>addFriend()}></input>
+                        </div>
+                        
                     </div>
-                    
                 </div>
             }
 
