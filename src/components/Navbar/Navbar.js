@@ -72,6 +72,7 @@ function Navbar(){
         <>
             <div className="Navbar">
                 <img src={currentUser.photoURL} className="dp" onClick={()=>{signOut(auth)}}></img>
+                <p style={{marginLeft:'1%',marginRight:'3%',color:'white',alignSelf:'center',fontSize:'20px'}}>{currentUser.displayName}</p>
                 <input type="text" className="search" onChange={(e)=>{setSearch(e.target.value)}} placeholder="Search for users"></input>
                 <input type="button" value="Search" className="Sbtn" onClick={()=>searchFor()}></input>
             </div>
@@ -79,7 +80,7 @@ function Navbar(){
                 SVis &&
                 <div className="popupdiv" onClick={()=>setSVis(false)}>
                     <div className="searchPopUp">
-                        <img src={SUserDetails.photoURL} style={{borderWidth:'1px',borderStyle:'solid',borderColor:'white'}}></img>
+                        <img src={SUserDetails.photoURL} id="dp1"></img>
                         <div className="details">
                             <div className="SName">{SUserDetails.displayName}</div>
                             <div className="SEmail">{SUserDetails.email}</div>

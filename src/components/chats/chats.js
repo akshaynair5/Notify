@@ -75,7 +75,7 @@ function Chats(){
                 }
             </div>
             <div className="textbox">
-                <input type="text" className="Main" onChange={(e)=>{setmessage(e.target.value)}} placeholder="Send a Message"></input>
+                <input type="text" className="Main" onChange={(e)=>{setmessage(e.target.value)}} placeholder={`Message ${currentfriend.name}`}></input>
                 <input type="button" className="SendMessage" value="Send" onClick={()=>SendMessage()}></input>
                 <input type="file" id="sendPhotos" style={{visibility:'hidden'}}></input>
                 <label htmlFor="sendPhotos"><img src={img} style={{height:'50px'}}></img></label>
