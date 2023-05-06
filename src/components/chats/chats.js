@@ -15,6 +15,7 @@ function Chats(){
     const [FchatId,setFID] = useState([]);
     const {currentfriend,setcf} = useContext(Authcontext)
     const [chatview,setcv] = useState('none')
+    // const [eks,seteks] = useState(document.getElementById('snd'))
     const FetchfriendChat = async()=>{
         const q=query(eventRef,or(where("chatId","==",`${currentUser.uid}`+`${currentfriend.uid}`),where("chatId","==",`${currentfriend.uid}`+`${currentUser.uid}`)))
         const querySnapShot1 = await getDocs(q)
@@ -32,6 +33,12 @@ function Chats(){
     }
     useEffect(()=>{
         FetchfriendChat()
+        document.addEventListener('keydown', (e)=>{
+            if (e.key === 'Enter') {
+                e.preventDefault()
+                SendMessage()
+            }
+        });
     },[])
     useEffect(()=>{
         console.log(currentfriend)
@@ -39,7 +46,6 @@ function Chats(){
     useEffect(()=>{
         console.log(friendChat)
     },[friendChat])
-
     const SendMessage=async()=>{
         var now = new Date().getTime()
         let temp = friendChat
@@ -47,8 +53,9 @@ function Chats(){
         await updateDoc(doc(db,"userChat",`${FchatId.chatId}`),{
             text:temp
         }).then(()=>{
-            console.log("Hii")
+            console.log("Done")
         })
+        window.location.reload();
     }
     return(
         <div className="chatbox">
@@ -76,7 +83,7 @@ function Chats(){
             </div>
             <div className="textbox">
                 <input type="text" className="Main" onChange={(e)=>{setmessage(e.target.value)}}  placeholder={'Message friend'}></input>
-                <input type="button" className="SendMessage" value="Send" onClick={()=>SendMessage()}></input>
+                <input type="button" className="SendMessage" value="Send" id='snd' onClick={()=>SendMessage()}></input>
                 <input type="file" id="sendPhotos" style={{visibility:'hidden'}}></input>
                 <label htmlFor="sendPhotos"><img src={img} style={{height:'50px'}}></img></label>
             </div>
