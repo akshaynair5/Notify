@@ -33,7 +33,7 @@ export const AuthContextProvider =({children})=>{
             querySnapShot1.forEach((doc)=>{
                 temp.push(doc.data())
             })
-            setcf(temp[0].currentfriend.friends)
+            setcf(temp[0].currentfriend)
         }catch(err){
             console.log(err)
         }
