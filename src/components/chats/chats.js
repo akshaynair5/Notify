@@ -36,7 +36,9 @@ function Chats(){
         document.addEventListener('keydown', (e)=>{
             if (e.key === 'Enter') {
                 e.preventDefault()
-                SendMessage()
+                if(message){
+                    SendMessage()
+                }
             }
         });
     },[])
