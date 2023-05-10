@@ -15,7 +15,6 @@ function Chats(){
     const [FchatId,setFID] = useState([]);
     const {currentfriend,setcf} = useContext(Authcontext)
     const [chatview,setcv] = useState('none')
-    // const [eks,seteks] = useState(document.getElementById('snd'))
     const FetchfriendChat = async()=>{
         const q=query(eventRef,or(where("chatId","==",`${currentUser.uid}`+`${currentfriend.uid}`),where("chatId","==",`${currentfriend.uid}`+`${currentUser.uid}`)))
         const querySnapShot1 = await getDocs(q)
