@@ -6,4 +6,4 @@ One of the significant features of this website is Firebase Authentication, whic
 
 Firestore is used to store and manage user data, such as user profiles, friends' list, and chat history. This feature makes it easy for users to access their data from any device and keep their conversations in sync across all devices. Additionally, Firestore's real-time updates enable users to receive notifications when a new message is received, ensuring that they don't miss anything important.
 
-Firebase Storage is also integrated into this website, making it easy for users to share images, videos, and other files with their friends during chats. Users can easily upload and download files using this feature, making it convenient to share media with friends without any hassle.
+Firebase Storage is also integrated into this website, making it easy for users to share images, videos, and other files with their friends during chats. Users can easily upload and download files using this feature, making it convenient to share media with friends without any hassle!!.
