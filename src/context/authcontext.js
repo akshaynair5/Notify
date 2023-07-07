@@ -41,18 +41,14 @@ export const AuthContextProvider =({children})=>{
     useEffect(()=>{
         const unsub = onAuthStateChanged(auth,(user)=>{
             setCurrentUser(user)
-            // console.log(user)
             fetchFriend(user);
         })
-        // fetchFriend()
 
         return ()=>{
             unsub();
         }
     },[]);
-    // <AuthContext.Provider value={{currentUser}}>
-    //     {children}
-    // </AuthContext.Provider>
+
     return(
         <Authcontext.Provider value={{currentUser,currentfriend,setcf}}>
             {children}
