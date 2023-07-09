@@ -18,8 +18,6 @@ function Navbar(){
         const q=query(userRef,where("uid","==",`${currentUser.uid}`))
         const querySnapShot1 = await getDocs(q)
         const temp = []
-        const q1=query(userRef,where("uid","==",`${SUserDetails.uid}`))
-        const querySnapShot2 = await getDocs(q1)
         const temp1 = []
         try{
             querySnapShot1.forEach((doc)=>{
