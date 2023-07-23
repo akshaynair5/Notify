@@ -27,7 +27,7 @@ function Chats(){
             setFID(temp[0])
             console.log(temp)
         }catch(err){
-            console.log(err)
+            console.log("error: ",err)
         }
     }
     useEffect(()=>{
