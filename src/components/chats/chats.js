@@ -8,14 +8,13 @@ import { getDocs, doc } from "firebase/firestore";
 import "./chat.css"
 
 function Chats(){
-    const {currentUser} = useContext(Authcontext)
     const [message,setmessage] = useState("")
     const eventRef = collection(db,"userChat")
+    const {currentUser} = useContext(Authcontext)
     const [friendChat,setFChat] = useState([])
     const [FchatId,setFID] = useState([]);
     const {currentfriend,setcf} = useContext(Authcontext)
     const [chatview,setcv] = useState('none')
-    // const [eks,seteks] = useState(document.getElementById('snd'))
     const FetchfriendChat = async()=>{
         const q=query(eventRef,or(where("chatId","==",`${currentUser.uid}`+`${currentfriend.uid}`),where("chatId","==",`${currentfriend.uid}`+`${currentUser.uid}`)))
         const querySnapShot1 = await getDocs(q)
@@ -64,6 +63,7 @@ function Chats(){
                     friendChat.map((chat)=>{
                         if(chat.user==`${currentUser.uid}`){
                             return(
+
                                 <div className="Userchats">
                                     <span>{chat.chat}</span>
                                     <img id="udp" src={currentUser.photoURL}></img>
