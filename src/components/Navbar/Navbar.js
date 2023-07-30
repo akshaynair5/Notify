@@ -13,7 +13,6 @@ function Navbar(){
     const [SVis,setSVis] = useState(false)
     const {currentUser} = useContext(Authcontext)
     const userRef = collection(db,"users")
-    const chatRef = collection(db,"userChats")
 
     const addFriend=async()=>{
         const q=query(userRef,where("uid","==",`${currentUser.uid}`))
