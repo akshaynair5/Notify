@@ -64,7 +64,7 @@ function Chats(){
         }).then(()=>{
             console.log("Done")
         })
-        window.location.reload();
+        FetchfriendChat()
     }
     return(
         <div className="chatbox">
