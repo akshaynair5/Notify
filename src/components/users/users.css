@@ -12,15 +12,104 @@
     border-radius: 20px;
     display: flex;
     text-align: center;
+    cursor: pointer;
+  } 
+  .users .usertabCurrent{
+    width:95%;
+    margin: 2%;
+    height: 15%;
+    background-color: #3E535A;
+    border-width:2px;
+    border-style: solid;
+    border-color: aqua;
+    border-radius: 20px;
+    display: flex;
+    text-align: center;
+    cursor: pointer;
+  } 
+  .users .usertabCurrent p{
+    height: max-content;
+    width: max-content;
+    margin-top: 0%;
+    text-align: center;
+    font-size: 3vh;
+    margin-top: 7.5%;
+    margin-left: 9%;
+  }
+  .users .usertab p{
+    height: max-content;
+    width: max-content;
+    margin-top: 0%;
+    text-align: center;
+    font-size: 3vh;
+    margin-top: 7.5%;
+    margin-left: 3%;
   }
   .users .usertab img{
     height: 70%;
     align-self: center;
     border-radius: 15px;
+    border-radius: 50%;
+    margin-left: 2%;
+
+  }
+  .users .usertabCurrent img{
+    height: 70%;
+    align-self: center;
+    border-radius: 15px;
+    border-radius: 50%;
     margin-left: 2%;
 
   }
   .users::-webkit-scrollbar {
+    width: 8px;               /* width of the entire scrollbar */
+  }
+  
+  .users::-webkit-scrollbar-track {
+    background: transparent;        /* color of the tracking area */
+  }
+  
+  .users::-webkit-scrollbar-thumb {
+    background-color: gray;    /* color of the scroll thumb */
+    border-radius: 20px;       /* roundness of the scroll thumb */
+  }
+
+
+  .usersMob{
+    width:15%;
+    height: 90%;
+    background-color:rgb(15, 15, 15);
+    overflow-y: scroll;
+  }
+  .usersMob .usertab{
+    width:95%;
+    margin: 2%;
+    height: 6%;
+    background-color: #3E535A;
+    border-radius: 50%;
+    display: flex;
+    text-align: center;
+  }
+  .usersMob .usertabCurrent{
+    width:94%;
+    height: 6%;
+    border-width:2%;
+    border-style: solid;
+    border-color: aqua;
+    background-color: #3E535A;
+    border-radius: 50%;
+    display: flex;
+    text-align: center;
+    overflow: hidden;
+  }
+  .usersMob .usertab img{
+    height: 95%;
+    width: 95%;
+    align-self: center;
+    border-radius: 50%;
+
+  }
+  .usersMob::-webkit-scrollbar {
     width: 8px;               /* width of the entire scrollbar */
   }
   

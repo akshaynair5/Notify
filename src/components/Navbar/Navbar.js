@@ -4,6 +4,7 @@ import { auth } from "../../firebase_config";
 import { collection, query, updateDoc, where } from "firebase/firestore";
 import { db } from "../../firebase_config";
 import { getDocs, doc ,setDoc,addDoc} from "firebase/firestore";
+import noRes from '../../imgs/no-results.png'
 import "./Navbar.css"
 import { signOut } from "firebase/auth";
 
@@ -12,6 +13,7 @@ function Navbar(){
     const [SUserDetails,setUDetails] = useState([])
     const [SVis,setSVis] = useState(false)
     const {currentUser} = useContext(Authcontext)
+    const [authState,setAS] = useState(false)
     const userRef = collection(db,"users")
 
     const addFriend=async()=>{
@@ -58,18 +60,35 @@ function Navbar(){
             querySnapShot1.forEach((doc)=>{
                 temp.push(doc.data())
             })
-            setUDetails(temp[0])
+            if(temp.length >= 1){
+                setUDetails(temp[0])
+            }
+            else{
+                setUDetails(null)
+            }
             setSVis(true)
         }catch(err){
             console.log(err)
         }
 
     }
+    const ViewDetails = () =>{
+        setAS(true)
+        console.log('hi')
+    }
     return(
         <>
+            {
+                authState &&
+                <div className="popUp2" onClick={()=>{setAS(false)}}>
+                    <div className="content"> 
+                        <button onClick={()=>signOut(auth)}>Log-out</button>
+                    </div>
+                </div> 
+            }
             <div className="Navbar">
-                <img src={currentUser.photoURL} className="dp" onClick={()=>{signOut(auth)}}></img>
-                <p style={{marginLeft:'1%',marginRight:'3%',color:'white',alignSelf:'center',fontSize:'20px'}}>{currentUser.displayName}</p>
+                <img src={currentUser.photoURL} className="dp" onClick={()=>ViewDetails()}></img>
+                <p style={{color:'white',alignSelf:'center'}}>{currentUser.displayName}</p>
                 <input type="text" className="search" onChange={(e)=>{setSearch(e.target.value)}} placeholder="Search for users"></input>
                 <input type="button" value="Search" className="Sbtn" onClick={()=>searchFor()}></input>
             </div>
@@ -77,12 +96,24 @@ function Navbar(){
                 SVis &&
                 <div className="popupdiv" onClick={()=>setSVis(false)}>
                     <div className="searchPopUp">
-                        <img src={SUserDetails.photoURL} id="dp1"></img>
-                        <div className="details">
-                            <div className="SName">{SUserDetails.displayName}</div>
-                            <div className="SEmail">{SUserDetails.email}</div>
-                            <input type="button" className="Add" value="Add +" onClick={()=>addFriend()}></input>
-                        </div>
+                    {
+                        SUserDetails !=null && 
+                        <>
+                            <img src={SUserDetails.photoURL} id="dp1"></img>
+                            <div className="details">
+                                <div className="SName">{SUserDetails.displayName}</div>
+                                <div className="SEmail">{SUserDetails.email}</div>
+                                <input type="button" className="Add" value="Add +" onClick={()=>addFriend()}></input>
+                            </div>
+                        </>
+                    }
+                    {
+                        SUserDetails == null && 
+                        <>
+                            <img src={noRes} style={{borderRadius:'0%'}}></img>
+                            <p>No users found with this username!!</p>
+                        </>
+                    }
                         
                     </div>
                 </div>

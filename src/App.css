@@ -43,6 +43,7 @@ body{
 }
 
 /* Register page CSS */
+
 .Form{
   position: absolute;
   left:33.33%;
@@ -120,4 +121,36 @@ body{
   display: flex;
   flex-direction: row;
 }
+label{
+  width: 100%;
+  height: max-content;
+  justify-content: center;
+  margin-top: 2%;
+}
+label p{
+  width: 100%;
+  text-align: center;
+}
+label img{
+  height: 100%;
+  width: 10%;
+  margin-left: 45%;
+  align-self: center;
+}
 
+@media only screen and (max-width:768px){
+  .Form{
+      position: absolute;
+      left:3vw;
+      width:90vw;
+      border-radius: 10px;
+    }
+    .Form input{
+      border-radius: 10px;
+    }
+    .Navs p{
+      font-size: 10px;
+      text-decoration: none;
+      margin-left: 2%;
+    }
+}

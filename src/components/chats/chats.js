@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react"
+import { useContext, useEffect, useRef, useState } from "react"
 import { Authcontext } from "../../context/authcontext"
 import settings from '../../imgs/gear.png'
 import img from '../../imgs/gallery.png'
@@ -9,6 +9,7 @@ import "./chat.css"
 
 function Chats(){
     const [message,setmessage] = useState("")
+    const chatsRef = useRef(null)
     const eventRef = collection(db,"userChat")
     const {currentUser} = useContext(Authcontext)
     const [friendChat,setFChat] = useState([])
@@ -39,12 +40,21 @@ function Chats(){
             }
         });
     },[])
-    useEffect(()=>{
-        console.log(currentfriend)
-    },[currentfriend])
-    useEffect(()=>{
-        console.log(friendChat)
-    },[friendChat])
+    useEffect(() => {
+        if (chatsRef.current) {
+            const divElement = chatsRef.current;
+            divElement.scrollTo({
+              top: divElement.scrollHeight,
+              behavior: "smooth",
+            });
+          }
+    }, [friendChat]);
+    // useEffect(()=>{
+    //     console.log(currentfriend)
+    // },[currentfriend])
+    // useEffect(()=>{
+    //     console.log(friendChat)
+    // },[friendChat])
     const SendMessage=async()=>{
         var now = new Date().getTime()
         let temp = friendChat
@@ -58,7 +68,7 @@ function Chats(){
     }
     return(
         <div className="chatbox">
-            <div className="chats">
+            <div className="chats" ref={chatsRef}>
                 {friendChat &&
                     friendChat.map((chat)=>{
                         if(chat.user==`${currentUser.uid}`){
@@ -84,8 +94,8 @@ function Chats(){
             <div className="textbox">
                 <input type="text" className="Main" onChange={(e)=>{setmessage(e.target.value)}}  placeholder={'Message friend'}></input>
                 <input type="button" className="SendMessage" value="Send" id='snd' onClick={()=>SendMessage()}></input>
-                <input type="file" id="sendPhotos" style={{visibility:'hidden'}}></input>
-                <label htmlFor="sendPhotos"><img src={img} style={{height:'50px'}}></img></label>
+                {/* <input type="file" id="sendPhotos" style={{visibility:'hidden'}}></input>
+                <label htmlFor="sendPhotos"><img src={img} style={{height:'50px'}}></img></label> */}
             </div>
         </div>
     )

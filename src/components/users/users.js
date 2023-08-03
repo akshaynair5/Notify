@@ -6,6 +6,7 @@ import { Authcontext } from "../../context/authcontext"
 import './users.css'
 function Users(){
     const {currentUser} = useContext(Authcontext)
+    const windowWidth = window.innerWidth
     const eventRef = collection(db,"users")
     const [friends,setFriends] = useState([])
     const {currentfriend,setcf} = useContext(Authcontext)
@@ -39,16 +40,55 @@ function Users(){
         setcf(friends);
     }
     return(
-        <div className='users' style={{position:'fixed',top:'10%'}}>
+        <>
             {
-                friends.map((friend)=>(
-                    <div className='usertab' onClick={()=>setCurrentfriend(friend)}>
-                        <img src={friend.photoURL}></img>
-                        <p style={{position:'relative',top:'10%',left:'8%',fontSize:'160%',fontSize:'160%'}}>{friend.name}</p>
-                    </div>
-                ))
+                windowWidth > 768 && 
+                <div className='users' style={{position:'fixed',top:'10%'}}>
+                {
+                        friends.map((friend)=>(
+                            <>
+                                {
+                                    friend.uid == currentfriend.uid && 
+                                    <div className='usertabCurrent' onClick={()=>setCurrentfriend(friend)}>
+                                        <img src={friend.photoURL}></img>
+                                        <p>{friend.name}</p>
+                                    </div>
+                                }
+                                {
+                                    friend.uid != currentfriend.uid && 
+                                    <div className='usertab' onClick={()=>setCurrentfriend(friend)}>
+                                        <img src={friend.photoURL}></img>
+                                        <p>{friend.name}</p>
+                                    </div>
+                                }
+                            </>
+                        ))
+                }
+                </div>
             }
-        </div>
+            {windowWidth <= 768 && 
+                <div className='usersMob' style={{position:'fixed',top:'10%'}}>
+                {
+                        friends.map((friend)=>(
+                            <>
+                                {
+                                    friend.uid == currentfriend.uid && 
+                                    <div className='usertabCurrent' onClick={()=>setCurrentfriend(friend)}>
+                                        <img src={friend.photoURL}></img>
+                                    </div>
+                                }
+                                {
+                                    friend.uid != currentfriend.uid && 
+                                    <div className='usertab' onClick={()=>setCurrentfriend(friend)}>
+                                        <img src={friend.photoURL}></img>
+                                    </div>
+                                }
+                            </>
+                        ))
+                }
+                </div>
+            }
+        </>
     )
 }
 

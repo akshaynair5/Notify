@@ -6,6 +6,7 @@ import { useState } from 'react'
 import { doc, setDoc } from "firebase/firestore"; 
 import { db } from '../firebase_config'
 import { storage } from '../firebase_config'
+import user from '../imgs/user.png'
 import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 
 
@@ -55,17 +56,17 @@ function Register(){
     }
     return(
         <form className="Form" onSubmit={(e)=>{handleSubmit(e)}}>
-            <img src={logo} style={{height:'300px',width:'400px',marginLeft:'20%'}}></img>
+            <img src={logo}></img>
             <input type="text" placeholder="Name"></input>
             <input type="email" placeholder="Email"></input>
             <input type="password" placeholder="Password"></input>
             <input type='file' id='file1' style={{display:'none'}}></input>
-            <label htmlFor='file1'>Add profile photo</label>
+            <label htmlFor='file1'><img src={user}></img><p> Add a profile photo</p></label>
             <input type='submit' value='Register' className="button-35" style={{backgroundColor:'#1F2A2D',color:'white'}}></input>
             <div className='Navs' style={{display:'flex',flexDirection:'row'}}>
                 <p>Already have an Account? </p>
                 {err && <span>Something went wrong Try again!!,{err}</span>}
-                <Link to='/Login' style={{color:'black',fontSize:'20px',textDecoration:'none',marginTop: '2.8%',marginLeft:'2%'}}>Click Here to Login</Link>
+                <p><Link to='/Notify'>Click Here to Login</Link></p>
             </div>
         </form>
     )
