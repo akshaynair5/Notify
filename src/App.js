@@ -19,8 +19,8 @@ function App() {
     )
   }
   return (
-    <BrowserRouter>
-      <Routes basename = "/Notify">
+    <BrowserRouter basename = "/Notify">
+      <Routes>
         <Route exact path="/home" element={<ProtectedRoute><Home/></ProtectedRoute>}/>
         <Route exact path="/Notify" element={<Login/>}></Route>
         <Route exact path="/Register" element={<Register/>}></Route>
