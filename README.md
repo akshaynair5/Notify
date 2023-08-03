@@ -10,6 +10,8 @@ Search and add your friends
 
 
 Home page (mobile)
+
+
 <img width="200" alt="image" src="https://github.com/akshaynair5/Notify/assets/108605741/9aac092a-2d7a-4225-952a-8c79f3d6925e">
 
 
