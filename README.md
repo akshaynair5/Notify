@@ -2,6 +2,8 @@
 
 A messaging website built with React, Firebase Authentication, Firestore, and Firebase Storage allows users to effortlessly connect with their friends. With this platform, users can search for their friends, add them to their friends' list, and start chatting with them in no time.
 
+ link - https://akshaynair5.github.io/Notify/
+
 Home page (PC)
 <img width="960" alt="image" src="https://github.com/akshaynair5/Notify/assets/108605741/5595bb9b-110e-4aad-999e-6af16c1c7506">
 
