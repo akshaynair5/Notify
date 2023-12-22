@@ -57,7 +57,7 @@ function Chats(){
     // },[friendChat])
     const SendMessage=async()=>{
         var now = new Date().getTime()
-        let temp = friendChat
+        let temp = friendChat;
         temp = [...temp,{chat:`${message}`,user:`${currentUser.uid}`,timestamp:`${now}`}]
         await updateDoc(doc(db,"userChat",`${FchatId.chatId}`),{
             text:temp
@@ -65,6 +65,8 @@ function Chats(){
             console.log("Done")
         })
         FetchfriendChat()
+        console.log(message);
+        setmessage("")
     }
     return(
         <div className="chatbox">
@@ -92,7 +94,7 @@ function Chats(){
                 }
             </div>
             <div className="textbox">
-                <input type="text" className="Main" onChange={(e)=>{setmessage(e.target.value)}}  placeholder={'Message friend'}></input>
+                <input type="text" className="Main" onChange={(e)=>{setmessage(e.target.value)}}  value={message} placeholder={'Message friend'}></input>
                 <input type="button" className="SendMessage" value="Send" id='snd' onClick={()=>SendMessage()}></input>
                 {/* <input type="file" id="sendPhotos" style={{visibility:'hidden'}}></input>
                 <label htmlFor="sendPhotos"><img src={img} style={{height:'50px'}}></img></label> */}

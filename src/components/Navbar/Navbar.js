@@ -15,6 +15,7 @@ function Navbar(){
     const {currentUser} = useContext(Authcontext)
     const [authState,setAS] = useState(false)
     const userRef = collection(db,"users")
+    const {currentfriend,setcf} = useContext(Authcontext)
 
     const addFriend=async()=>{
         const q=query(userRef,where("uid","==",`${currentUser.uid}`))
@@ -48,6 +49,7 @@ function Navbar(){
             await updateDoc(doc(db,"users",`${SUserDetails.uid}`),{
                 friends:temp2,
             })
+            setcf({uid:`${SUserDetails.uid}`,name:`${SUserDetails.displayName}`,photoURL:`${SUserDetails.photoURL}`})
         }catch(err){
             console.log(err)
         }
