@@ -3,11 +3,15 @@ import { BrowserRouter,Routes,Route, Navigate } from 'react-router-dom';
 import Home from './pages/home'
 import Register from './pages/register';
 import Login from './pages/login';
-import { useContext } from 'react';
+import { useContext,useEffect } from 'react';
 import { Authcontext } from './context/authcontext';
 
 function App() {
   const {currentUser} = useContext(Authcontext)
+
+  useEffect(()=>{
+    console.log(currentUser)
+  },[currentUser])
   const ProtectedRoute = ({children})=>{
     if(!currentUser){
       return(
