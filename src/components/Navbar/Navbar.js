@@ -58,7 +58,7 @@ function Navbar(){
 
         let temp2 = currentUserDetails.notifications;
         temp2 = [...temp2,{nid:nid,uid:`${currentUser.uid}`,name:`${SUserDetails.displayName}`,photoURL:`${SUserDetails.photoURL}`,status:0}];
-        await updateDoc(doc(db,"users",`${SUserDetails.uid}`),{
+        await updateDoc(doc(db,"users",`${currentUser.uid}`),{
             notifications:temp2,
         })
 
@@ -97,7 +97,7 @@ function Navbar(){
             console.log(err)
         }
     }
-    const addFriend=async(details)=>{
+    const addFriend = async(details)=>{
         // const q=query(userRef,where("uid","==",`${currentUser.uid}`))
         // const querySnapShot1 = await getDocs(q)
         // const temp = []
@@ -120,9 +120,10 @@ function Navbar(){
         // }catch(err){
         //     console.log(err)
         // }
+        const q=query(userRef,where("uid","==",`${details.uid}`))
         const querySnapShot1 = await getDocs(q)
         let temp2 = currentUserDetails.friends
-        temp2 = [...temp2,{uid:`${details.uid}`,name:`${details.displayName}`,photoURL:`${details.photoURL}`}]
+        temp2 = [...temp2,{uid:`${details.uid}`,name:`${details.name}`,photoURL:`${details.photoURL}`}]
         let updatedNotificationsU = currentUserDetails.notifications;
         const time = Date.now();
         for(let i=0;i<updatedNotificationsU.length;i++){
@@ -143,7 +144,6 @@ function Navbar(){
         })
         
         const temp1 = []
-        const q=query(userRef,where("uid","==",`${details.uid}`))
         try{
             querySnapShot1.forEach((doc)=>{
                 temp1.push(doc.data())
@@ -161,7 +161,7 @@ function Navbar(){
                 friends:temp2,
                 notifications:updatedNotificationsF
             })
-            setcf({uid:`${details.uid}`,name:`${details.displayName}`,photoURL:`${details.photoURL}`})
+            setcf({uid:`${details.uid}`,name:`${details.name}`,photoURL:`${details.photoURL}`})
         }catch(err){
             console.log(err)
         }
@@ -254,8 +254,8 @@ function Navbar(){
                                             <img src ={notification.photoURL}></img>
                                             <p>{notification.name}</p>
                                             <div className="ADbts">
-                                                <button onClick={addFriend(notification)}>A</button>
-                                                <button onClick={declineRequest(notification)}>D</button>
+                                                <button onClick={()=>addFriend(notification)}>A</button>
+                                                <button onClick={()=>declineRequest(notification)}>D</button>
                                             </div>
                                         </div>
                                     )

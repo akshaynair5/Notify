@@ -74,6 +74,13 @@
     border-radius: 15px;
     padding: 2%;
 }
+.popupdiv .notificationsDiv .friendRequest{
+    display: flex;
+    height: 10vh;
+}
+.popupdiv .notificationsDiv .friendRequest p{
+    padding-left: 2vh;
+}
 .searchPopUp{
     background-color: cadetblue;
     width:65%;

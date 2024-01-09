@@ -43,31 +43,33 @@ function Chats(){
     // },[])
 
     useEffect(() => {
-        const q = query(
-            eventRef,
-            or(
-                where("chatId", "==", `${currentUser.uid}` + `${currentfriend.uid}`),
-                where("chatId", "==", `${currentfriend.uid}` + `${currentUser.uid}`)
-            )
-        );
-    
-        const unsubscribe = onSnapshot(q, (querySnapshot) => {
-            const temp = [];
-    
-            querySnapshot.forEach((doc) => {
-                temp.push(doc.data());
+        if(currentfriend){
+            const q = query(
+                eventRef,
+                or(
+                    where("chatId", "==", `${currentUser.uid}` + `${currentfriend.uid}`),
+                    where("chatId", "==", `${currentfriend.uid}` + `${currentUser.uid}`)
+                )
+            );
+        
+            const unsubscribe = onSnapshot(q, (querySnapshot) => {
+                const temp = [];
+        
+                querySnapshot.forEach((doc) => {
+                    temp.push(doc.data());
+                });
+        
+                setFChat(temp[0]?.text || []); // Ensure temp[0] is defined before accessing its properties
+                setFID(temp[0]);
+        
+                console.log(temp);
             });
-    
-            setFChat(temp[0]?.text || []); // Ensure temp[0] is defined before accessing its properties
-            setFID(temp[0]);
-    
-            console.log(temp);
-        });
-    
-        return () => {
-            // This will unsubscribe the snapshot listener when the component is unmounted
-            unsubscribe();
-        };
+        
+            return () => {
+                // This will unsubscribe the snapshot listener when the component is unmounted
+                unsubscribe();
+            };
+        }
     }, [currentfriend]);
     
     useEffect(() => {
