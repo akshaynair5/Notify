@@ -1,4 +1,4 @@
-import { useContext, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { Authcontext } from "../../context/authcontext"
 import { auth } from "../../firebase_config";
 import { collection, query, updateDoc, where } from "firebase/firestore";
@@ -16,40 +16,152 @@ function Navbar(){
     const [authState,setAS] = useState(false)
     const userRef = collection(db,"users")
     const {currentfriend,setcf} = useContext(Authcontext)
+    const [currentUserDetails,setCUD] = useState([]);
+    const [notifications,setNotifications] = useState([]);
+    const [notificationsPopUp,setNP] = useState(false);
 
-    const addFriend=async()=>{
+
+    useEffect(()=>{
+        fetchCUD();
+    },[])
+    const fetchCUD = async ()=>{
         const q=query(userRef,where("uid","==",`${currentUser.uid}`))
         const querySnapShot1 = await getDocs(q)
         const temp = []
-        const temp1 = []
         try{
             querySnapShot1.forEach((doc)=>{
                 temp.push(doc.data())
             })
-            let temp2 = temp[0].friends
-            temp2 = [...temp2,{uid:`${SUserDetails.uid}`,name:`${SUserDetails.displayName}`,photoURL:`${SUserDetails.photoURL}`}]
-            await updateDoc(doc(db,"users",`${currentUser.uid}`),{
-                friends:temp2,
-            }).then(async()=>{
-                await setDoc(doc(db, "userChat", `${currentUser.uid}`+`${SUserDetails.uid}`), {
-                    text:[],
-                    photos:[],
-                    chatId:`${currentUser.uid}`+`${SUserDetails.uid}`
-                });
+            setCUD(temp[0]);
+            setNotifications(temp[0].notifications);
+        }catch(err){
+            console.log(err)
+        }
+    }
+    const sendRequest = async ()=>{
+        const nid = Date.now();
+        const q=query(userRef,where("uid","==",`${SUserDetails.uid}`))
+        const querySnapShot1 = await getDocs(q)
+        const temp = []
+        try{
+            querySnapShot1.forEach((doc)=>{
+                temp.push(doc.data())
+            })
+            let temp2 = temp[0].notifications;
+            temp2 = [...temp2,{nid:nid,uid:`${currentUser.uid}`,name:`${currentUser.displayName}`,photoURL:`${currentUser.photoURL}`,status:0}]
+            await updateDoc(doc(db,"users",`${SUserDetails.uid}`),{
+                notifications:temp2,
             })
         }catch(err){
             console.log(err)
         }
+
+        let temp2 = currentUserDetails.notifications;
+        temp2 = [...temp2,{nid:nid,uid:`${currentUser.uid}`,name:`${SUserDetails.displayName}`,photoURL:`${SUserDetails.photoURL}`,status:0}];
+        await updateDoc(doc(db,"users",`${SUserDetails.uid}`),{
+            notifications:temp2,
+        })
+
+    }
+    const declineRequest = async(details)=>{
+        const time = Date.now()
+        const querySnapShot1 = await getDocs(q)
+        let updatedNotificationsU = currentUserDetails.notifications;
+        for(let i=0;i<updatedNotificationsU.length;i++){
+            if(updatedNotificationsU[i] == details.nid){
+                updatedNotificationsU[i].status = 2;
+                updatedNotificationsU[i].nid = time;
+            }
+        }
+        await updateDoc(doc(db,"users",`${currentUser.uid}`),{
+            notifications:updatedNotificationsU
+        })
+        
+        const temp1 = []
+        const q=query(userRef,where("uid","==",`${details.uid}`))
+        try{
+            querySnapShot1.forEach((doc)=>{
+                temp1.push(doc.data())
+            })
+            let updatedNotificationsF = currentUserDetails.notifications;
+            for(let i=0;i<updatedNotificationsF.length;i++){
+                if(updatedNotificationsF[i] == details.nid){
+                    updatedNotificationsF[i].status = 2;
+                    updatedNotificationsF[i].nid = time;
+                }
+            }
+            await updateDoc(doc(db,"users",`${details.uid}`),{
+                notifications:updatedNotificationsF
+            })
+        }catch(err){
+            console.log(err)
+        }
+    }
+    const addFriend=async(details)=>{
+        // const q=query(userRef,where("uid","==",`${currentUser.uid}`))
+        // const querySnapShot1 = await getDocs(q)
+        // const temp = []
+        // const temp1 = []
+        // try{
+        //     querySnapShot1.forEach((doc)=>{
+        //         temp.push(doc.data())
+        //     })
+        //     let temp2 = temp[0].friends
+        //     temp2 = [...temp2,{uid:`${SUserDetails.uid}`,name:`${SUserDetails.displayName}`,photoURL:`${SUserDetails.photoURL}`}]
+        //     await updateDoc(doc(db,"users",`${currentUser.uid}`),{
+        //         friends:temp2,
+        //     }).then(async()=>{
+        //         await setDoc(doc(db, "userChat", `${currentUser.uid}`+`${SUserDetails.uid}`), {
+        //             text:[],
+        //             photos:[],
+        //             chatId:`${currentUser.uid}`+`${SUserDetails.uid}`
+        //         });
+        //     })
+        // }catch(err){
+        //     console.log(err)
+        // }
+        const querySnapShot1 = await getDocs(q)
+        let temp2 = currentUserDetails.friends
+        temp2 = [...temp2,{uid:`${details.uid}`,name:`${details.displayName}`,photoURL:`${details.photoURL}`}]
+        let updatedNotificationsU = currentUserDetails.notifications;
+        const time = Date.now();
+        for(let i=0;i<updatedNotificationsU.length;i++){
+            if(updatedNotificationsU[i] == details.nid){
+                updatedNotificationsU[i].status = 1;
+                updatedNotificationsU[i].nid = time;
+            }
+        }
+        await updateDoc(doc(db,"users",`${currentUser.uid}`),{
+            friends:temp2,
+            notifications:updatedNotificationsU
+        }).then(async()=>{
+            await setDoc(doc(db, "userChat", `${currentUser.uid}`+`${details.uid}`), {
+                text:[],
+                photos:[],
+                chatId:`${currentUser.uid}`+`${details.uid}`
+            });
+        })
+        
+        const temp1 = []
+        const q=query(userRef,where("uid","==",`${details.uid}`))
         try{
             querySnapShot1.forEach((doc)=>{
                 temp1.push(doc.data())
             })
             let temp2 = temp1[0].friends
             temp2 = [...temp2,{uid:`${currentUser.uid}`,name:`${currentUser.displayName}`,photoURL:`${currentUser.photoURL}`}]
-            await updateDoc(doc(db,"users",`${SUserDetails.uid}`),{
+            let updatedNotificationsF = currentUserDetails.notifications;
+            for(let i=0;i<updatedNotificationsF.length;i++){
+                if(updatedNotificationsF[i] == details.nid){
+                    updatedNotificationsF[i].status = 1;
+                    updatedNotificationsF[i].nid = time;
+                }
+            }
+            await updateDoc(doc(db,"users",`${details.uid}`),{
                 friends:temp2,
+                notifications:updatedNotificationsF
             })
-            setcf({uid:`${SUserDetails.uid}`,name:`${SUserDetails.displayName}`,photoURL:`${SUserDetails.photoURL}`})
+            setcf({uid:`${details.uid}`,name:`${details.displayName}`,photoURL:`${details.photoURL}`})
         }catch(err){
             console.log(err)
         }
@@ -93,6 +205,7 @@ function Navbar(){
                 <p style={{color:'white',alignSelf:'center'}}>{currentUser.displayName}</p>
                 <input type="text" className="search" onChange={(e)=>{setSearch(e.target.value)}} placeholder="Search for users"></input>
                 <input type="button" value="Search" className="Sbtn" onClick={()=>searchFor()}></input>
+                <input type='button' value='N' className='notifications' onClick={()=>{setNP(true)}}></input>
             </div>
             {
                 SVis &&
@@ -105,7 +218,7 @@ function Navbar(){
                             <div className="details">
                                 <div className="SName">{SUserDetails.displayName}</div>
                                 <div className="SEmail">{SUserDetails.email}</div>
-                                <input type="button" className="Add" value="Add +" onClick={()=>addFriend()}></input>
+                                <input type="button" className="Add" value="Add +" onClick={()=>sendRequest()}></input>
                             </div>
                         </>
                     }
@@ -117,6 +230,59 @@ function Navbar(){
                         </>
                     }
                         
+                    </div>
+                </div>
+            }
+            {
+                notificationsPopUp && 
+                <div className="popupdiv" onClick={()=>setNP(false)}>
+                    <div className="notificationsDiv">
+                        {notifications.length > 0 && 
+                            notifications.map((notification)=>{
+                                if(notification.status == 0 && notification.uid == currentUser.uid){
+                                    return(
+                                        <div className="friendRequest">
+                                            <img src ={notification.photoURL}></img>
+                                            <p>{notification.name}</p>
+                                            <p>pending</p>
+                                        </div>
+                                    )
+                                }
+                                else if(notification.status == 0){
+                                    return(
+                                        <div className="friendRequest">
+                                            <img src ={notification.photoURL}></img>
+                                            <p>{notification.name}</p>
+                                            <div className="ADbts">
+                                                <button onClick={addFriend(notification)}>A</button>
+                                                <button onClick={declineRequest(notification)}>D</button>
+                                            </div>
+                                        </div>
+                                    )
+                                }
+                                else if(notification.status == 1){
+                                    return(
+                                        <div className="friendRequest">
+                                            <img src ={notification.photoURL}></img>
+                                            <p>{notification.name}</p>
+                                            <p>Accepted</p>
+                                        </div>
+                                    )
+                                }
+                                else if(notification.status == 2){
+                                    return(
+                                        <div className="friendRequest">
+                                            <img src ={notification.photoURL}></img>
+                                            <p>{notification.name}</p>
+                                            <p>Rejected</p>
+                                        </div>
+                                    )
+                                }
+                            })
+                        }
+                        {notifications.length == 0 &&
+                            <p>No notifications!!</p>
+                        }
                     </div>
                 </div>
             }

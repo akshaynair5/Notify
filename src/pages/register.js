@@ -38,7 +38,8 @@ function Register(){
                                 email,
                                 photoURL: downloadURL,
                                 friends:[],
-                                currentFriend:{}
+                                currentFriend:{},
+                                notifications:[]
                             });
                             
                             //create empty user chats on firestore

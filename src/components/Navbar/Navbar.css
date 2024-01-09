@@ -62,6 +62,18 @@
     z-index: 3;
     background-color: rgba(0, 0, 0, 0.456);
 }
+.popupdiv .notificationsDiv{
+    position: absolute;
+    z-index: 3;
+    left: 60%;
+    top:15%;
+    min-height: 40%;
+    max-height: max-content;
+    width: 30%;
+    background-color: aliceblue;
+    border-radius: 15px;
+    padding: 2%;
+}
 .searchPopUp{
     background-color: cadetblue;
     width:65%;
