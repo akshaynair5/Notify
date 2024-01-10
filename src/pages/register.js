@@ -38,7 +38,7 @@ function Register(){
                                 email,
                                 photoURL: downloadURL,
                                 friends:[],
-                                currentFriend:{},
+                                currentfriend:{},
                                 notifications:[]
                             });
                             

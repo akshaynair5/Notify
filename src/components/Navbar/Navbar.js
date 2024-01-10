@@ -68,7 +68,7 @@ function Navbar(){
         const querySnapShot1 = await getDocs(q)
         let updatedNotificationsU = currentUserDetails.notifications;
         for(let i=0;i<updatedNotificationsU.length;i++){
-            if(updatedNotificationsU[i] == details.nid){
+            if(updatedNotificationsU[i].nid == details.nid){
                 updatedNotificationsU[i].status = 2;
                 updatedNotificationsU[i].nid = time;
             }
@@ -85,7 +85,7 @@ function Navbar(){
             })
             let updatedNotificationsF = currentUserDetails.notifications;
             for(let i=0;i<updatedNotificationsF.length;i++){
-                if(updatedNotificationsF[i] == details.nid){
+                if(updatedNotificationsF[i].nid == details.nid){
                     updatedNotificationsF[i].status = 2;
                     updatedNotificationsF[i].nid = time;
                 }
@@ -127,7 +127,7 @@ function Navbar(){
         let updatedNotificationsU = currentUserDetails.notifications;
         const time = Date.now();
         for(let i=0;i<updatedNotificationsU.length;i++){
-            if(updatedNotificationsU[i] == details.nid){
+            if(updatedNotificationsU[i].nid == details.nid){
                 updatedNotificationsU[i].status = 1;
                 updatedNotificationsU[i].nid = time;
             }
@@ -152,7 +152,7 @@ function Navbar(){
             temp2 = [...temp2,{uid:`${currentUser.uid}`,name:`${currentUser.displayName}`,photoURL:`${currentUser.photoURL}`}]
             let updatedNotificationsF = currentUserDetails.notifications;
             for(let i=0;i<updatedNotificationsF.length;i++){
-                if(updatedNotificationsF[i] == details.nid){
+                if(updatedNotificationsF[i].nid == details.nid){
                     updatedNotificationsF[i].status = 1;
                     updatedNotificationsF[i].nid = time;
                 }
