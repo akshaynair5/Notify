@@ -98,28 +98,6 @@ function Navbar(){
         }
     }
     const addFriend = async(details)=>{
-        // const q=query(userRef,where("uid","==",`${currentUser.uid}`))
-        // const querySnapShot1 = await getDocs(q)
-        // const temp = []
-        // const temp1 = []
-        // try{
-        //     querySnapShot1.forEach((doc)=>{
-        //         temp.push(doc.data())
-        //     })
-        //     let temp2 = temp[0].friends
-        //     temp2 = [...temp2,{uid:`${SUserDetails.uid}`,name:`${SUserDetails.displayName}`,photoURL:`${SUserDetails.photoURL}`}]
-        //     await updateDoc(doc(db,"users",`${currentUser.uid}`),{
-        //         friends:temp2,
-        //     }).then(async()=>{
-        //         await setDoc(doc(db, "userChat", `${currentUser.uid}`+`${SUserDetails.uid}`), {
-        //             text:[],
-        //             photos:[],
-        //             chatId:`${currentUser.uid}`+`${SUserDetails.uid}`
-        //         });
-        //     })
-        // }catch(err){
-        //     console.log(err)
-        // }
         const q=query(userRef,where("uid","==",`${details.uid}`))
         const querySnapShot1 = await getDocs(q)
         let temp2 = currentUserDetails.friends
