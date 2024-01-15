@@ -5,6 +5,9 @@ import { collection, query, updateDoc, where } from "firebase/firestore";
 import { db } from "../../firebase_config";
 import { getDocs, doc ,setDoc,addDoc} from "firebase/firestore";
 import noRes from '../../imgs/no-results.png'
+import searchIcon from '../../imgs/Iconsax.svg'
+import noti from '../../imgs/noti.svg'
+import add from '../../imgs/add.svg'
 import "./Navbar.css"
 import { signOut } from "firebase/auth";
 
@@ -180,10 +183,10 @@ function Navbar(){
             }
             <div className="Navbar">
                 <img src={currentUser.photoURL} className="dp" onClick={()=>ViewDetails()}></img>
-                <p style={{color:'white',alignSelf:'center'}}>{currentUser.displayName}</p>
+                <p style={{alignSelf:'center'}}>{currentUser.displayName}</p>
                 <input type="text" className="search" onChange={(e)=>{setSearch(e.target.value)}} placeholder="Search for users"></input>
-                <input type="button" value="Search" className="Sbtn" onClick={()=>searchFor()}></input>
-                <input type='button' value='N' className='notifications' onClick={()=>{setNP(true)}}></input>
+                <button className="Sbtn" onClick={()=>searchFor()}><img src={searchIcon}></img></button>
+                <button className='notifications' onClick={()=>{setNP(true)}}><img src={noti}></img></button>
             </div>
             {
                 SVis &&
@@ -192,11 +195,11 @@ function Navbar(){
                     {
                         SUserDetails !=null && 
                         <>
-                            <img src={SUserDetails.photoURL} id="dp1"></img>
+                            <img src={SUserDetails.photoURL} className="dp1"></img>
                             <div className="details">
                                 <div className="SName">{SUserDetails.displayName}</div>
                                 <div className="SEmail">{SUserDetails.email}</div>
-                                <input type="button" className="Add" value="Add +" onClick={()=>sendRequest()}></input>
+                                <button className="Add" onClick={()=>sendRequest()}><img src={add}></img></button>
                             </div>
                         </>
                     }

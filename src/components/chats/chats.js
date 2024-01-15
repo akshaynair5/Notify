@@ -2,6 +2,7 @@ import { useContext, useEffect, useRef, useState } from "react"
 import { Authcontext } from "../../context/authcontext"
 import settings from '../../imgs/gear.png'
 import img from '../../imgs/gallery.png'
+import send from '../../imgs/Vector.svg'
 import { collection, query, updateDoc, where ,or,and} from "firebase/firestore";
 import { onSnapshot } from 'firebase/firestore';
 import { db } from "../../firebase_config";
@@ -127,7 +128,7 @@ function Chats(){
             </div>
             <div className="textbox">
                 <input type="text" className="Main" onChange={(e)=>{setmessage(e.target.value)}}  value={message} placeholder={'Message friend'}></input>
-                <input type="button" className="SendMessage" value="Send" id='snd' onClick={()=>SendMessage()}></input>
+                <button className="SendMessage" id='snd' onClick={()=>SendMessage()}><img src={send}></img></button>
                 {/* <input type="file" id="sendPhotos" style={{visibility:'hidden'}}></input>
                 <label htmlFor="sendPhotos"><img src={img} style={{height:'50px'}}></img></label> */}
             </div>

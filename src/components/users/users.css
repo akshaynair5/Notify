@@ -1,14 +1,19 @@
 .users{
     width:30%;
     height: 90%;
-    background-color:rgb(15, 15, 15);
+    background-color:#FFFFFF;
     overflow-y: scroll;
+    border: none;
+    border-top: none;
+    border-bottom: none;
+    border-left: none;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
   }
   .users .usertab{
     width:95%;
     margin: 2%;
     height: 15%;
-    background-color: #3E535A;
+    background-color: #FFFFFF;
     border-radius: 20px;
     display: flex;
     text-align: center;
@@ -18,15 +23,20 @@
     width:95%;
     margin: 2%;
     height: 15%;
-    background-color: #3E535A;
-    border-width:2px;
-    border-style: solid;
-    border-color: aqua;
+    background-color: rgb(205, 205, 205);
+    /* border-width:2px; */
+    /* border-style: solid; */
+    /* border-color: grey; */
     border-radius: 20px;
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
     display: flex;
     text-align: center;
     cursor: pointer;
   } 
+  .users .usertabCurrent:hover{
+    background-color:gray;
+  }
   .users .usertabCurrent p{
     height: max-content;
     width: max-content;
@@ -49,15 +59,16 @@
     height: 70%;
     align-self: center;
     border-radius: 15px;
-    border-radius: 50%;
+    border-radius: 20px;
     margin-left: 2%;
 
   }
   .users .usertabCurrent img{
     height: 70%;
+    width: 15%;
     align-self: center;
     border-radius: 15px;
-    border-radius: 50%;
+    border-radius: 20px;
     margin-left: 2%;
 
   }

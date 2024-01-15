@@ -4,38 +4,43 @@
     top:10%;
     width:70%;
     height: 90%;
-    background-color:darkslategrey;
+    background-color:#FFFFFF;
   }
   .textbox{
     position: fixed;
-    bottom: 0%;
-    left:30%;
+    bottom: 1.5%;
+    left:32.5%;
     display: flex;
-    background-color: black;
-    width: 70%;
-    height: 10%;
+    background-color:#FFFFFF;
+    width: 65%;
+    height: 8%;
+    border-radius: 20px;
+    border-width: 2px;
+    border-style: solid;
+    border-color: rgb(188, 188, 188);
+    padding-left: none;
   }
   .textbox .Main{
     margin-left: 2%;
     padding-left: 2%;
-    width: 75%;
-    height: 70%;
+    width: 87.5%;
+    height: 96%;
     align-self: center;
-    border-radius: 20px;
-    border-width: 2px;
-    border-style: solid;
-    border-color: aqua;
-    background-color: transparent;
-    color: white;
+    color: transparent;
+    border: none;
     font-size: 20px;
+    color: black;
+  }
+  .textbox .Main:focus {
+    border: none;
+    outline: none;
   }
   .textbox .SendMessage{
-    width: 15%;
-    height: 70%;
+    width: fit-content;
+    height: 90%;
     border-radius: 20px;
     border-width: 2px;
-    border-style: solid;
-    border-color: aqua;
+    border: none;
     align-self: center;
     position: relative;
     left:2%;
@@ -44,9 +49,12 @@
     transition: 0.5s ease;
     font-size: 20px;
   }
+  .textbox .SendMessage img{
+    height: 60%;
+  }
   .textbox .SendMessage:hover{
     cursor: pointer;
-    background-color: #3E535A;
+    background-color: gray;
   }
   .chats{
     width: 100%;
@@ -66,13 +74,10 @@
     margin-bottom: 1.5%;
   }
   .chats .Userchats span{
-    background-color: #3E535A;
+    background-color: #615EF0;
     height: max-content;
     padding: 2%;
     border-radius: 20px;
-    border-width: 1px;
-    border-style: solid;
-    border-color: black;
   }
   .chats .Userchats #udp{
     margin-left: 1%;
@@ -81,8 +86,6 @@
     border-width: 1px;
     width: 5%;
     height: 90%;
-    border-style: solid;
-    border-color: black;
   }
   
   
@@ -90,10 +93,7 @@
     display: flex;
   }
   .chats .friendchats span{
-    background-color: #3E535A;
-    border-width: 1px;
-    border-style: solid;
-    border-color: black;
+    background-color: #F1F1F1;
     height: max-content;
     padding: 2%;
     border-radius: 20px;
@@ -106,8 +106,6 @@
     border-width: 1px;
     width: 5%;
     height: 100%;
-    border-style: solid;
-    border-color: black;
   }
 
   @media only screen and (max-width:768px){
@@ -117,14 +115,14 @@
       top:10%;
       width:85%;
       height: 90%;
-      background-color:darkslategrey;
+      background-color:#FFFFFF;
     }
     .textbox{
       position: fixed;
       bottom: 0%;
       left:15%;
       display: flex;
-      background-color: black;
+      background-color: #FFFFFF;
       width: 85%;
       height: 10%;
     }
@@ -137,7 +135,7 @@
       border-radius: 20px;
       border-width: 2px;
       border-style: solid;
-      border-color: aqua;
+      border-color: black;
       background-color: transparent;
       color: white;
       font-size: 12px;
@@ -148,7 +146,7 @@
       border-radius: 20px;
       border-width: 2px;
       border-style: solid;
-      border-color: aqua;
+      border-color: black;
       align-self: center;
       position: relative;
       left:2%;
@@ -159,7 +157,7 @@
     }
     .textbox .SendMessage:hover{
       cursor: pointer;
-      background-color: #3E535A;
+      background-color: #615EF0;
     }
     .chats{
       width: 100%;
@@ -178,13 +176,10 @@
       margin-bottom: -7.5%;
     }
     .chats .Userchats span{
-      background-color: #3E535A;
+      background-color: #615EF0;
       height: max-content;
       padding: 4%;
       border-radius: 12px;
-      border-width: 1px;
-      border-style: solid;
-      border-color: black;
       font-size: 10px;
       margin-top: 0%;
     }
@@ -195,8 +190,6 @@
       border-width: 1px;
       width: 8%;
       margin-top: 2%;
-      border-style: solid;
-      border-color: black;
     }
     
     
@@ -204,10 +197,7 @@
       display: flex;
     }
     .chats .friendchats span{
-      background-color: #3E535A;
-      border-width: 1px;
-      border-style: solid;
-      border-color: black;
+      background-color: #F1F1F1;
       min-height: 10%;
       /* height: max-content; */
       padding: 4%;
@@ -222,8 +212,6 @@
       width: 8%;
       height: 85%;
       margin-top: 2%;
-      border-style: solid;
-      border-color: black;
     }
   
   }
