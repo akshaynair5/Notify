@@ -4,18 +4,7 @@ A messaging website built with React, Firebase Authentication, Firestore, and Fi
 
  link - https://akshaynair5.github.io/Notify/
 
-Home page (PC)
-<img width="960" alt="image" src="https://github.com/akshaynair5/Notify/assets/108605741/5595bb9b-110e-4aad-999e-6af16c1c7506">
-
-Search and add your friends
-<img width="960" alt="image" src="https://github.com/akshaynair5/Notify/assets/108605741/48ab6155-cc00-4780-903c-83b34c6c78b0">
-
-
-Home page (mobile)
-
-
-<img width="200" alt="image" src="https://github.com/akshaynair5/Notify/assets/108605741/9aac092a-2d7a-4225-952a-8c79f3d6925e">
-
+![image](https://github.com/user-attachments/assets/c3cb29e9-3a7a-49fa-a444-0f8dacc9cff8)
 
 One of the significant features of this website is Firebase Authentication, which ensures secure and reliable login. This feature allows users to sign in using their Google, account, or they can create a new account specifically for this messaging platform. Once logged in, users can search for their friends using their usernames, and add them to their friends' list.
 
